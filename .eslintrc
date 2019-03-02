@@ -1,0 +1,15 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "sourceType": "module"
+  },
+  "extends": ["eslint:recommended"],
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "no-unused-vars": "off"
+  },
+  "env": {
+    "jest": true
+  }
+}

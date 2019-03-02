@@ -1,0 +1,9 @@
+# npm
+node_modules
+npm-debug.log*
+
+# @pika/pack
+pkg
+
+# misc
+.DS_Store
