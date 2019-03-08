@@ -103,7 +103,7 @@ define the payload's type.
 
 ```ts
 const fetchRecipesSuccess = createAction(
-'FETCH_RECIPES_SUCCESS'
+  'FETCH_RECIPES_SUCCESS'
 ).withPayload<Recipe[]>();
 
 const fetchRecipesFailure = createAction(
