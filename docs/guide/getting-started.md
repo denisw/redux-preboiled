@@ -34,7 +34,7 @@ box.
 
 ## Next Steps
 
-For a tour of Redux Preboiled, see the following sections on helpers for
+For a tour of Redux Preboiled, see the guides on the provided helpers for
 [actions](./actions.md), [reducers](./reducers.md) and [testing](./testing.md).
 
 [create-react-app]: https://facebook.github.io/create-react-app/ 
