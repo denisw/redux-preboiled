@@ -26,3 +26,7 @@ export default function createAction<T extends string>(
     withPayload
   })
 }
+
+const fetchRecipesSuccess = createAction(
+  'FETCH_RECIPES_SUCCESS_FOO_BAR'
+).withPayload()

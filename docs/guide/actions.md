@@ -14,17 +14,17 @@ const FETCH_RECIPES_FAILURE = 'FETCH_RECIPES_FAILURE';
 // Action Creators
 
 const fetchRecipes = () => ({
-    type: FETCH_RECIPES
+  type: FETCH_RECIPES
 });
 
 const fetchRecipesSuccess = recipes => ({
-    type: FETCH_RECIPES_SUCCESS,
-    payload: recipes
+  type: FETCH_RECIPES_SUCCESS,
+  payload: recipes
 });
 
 const fetchRecipesFailure = error => ({
-    type: FETCH_RECIPES_FAILURE,
-    payload: error
+  type: FETCH_RECIPES_FAILURE,
+  payload: error
 });
 ```
 
@@ -70,7 +70,9 @@ arguments, and the generated actions have no property other than `type`. However
 you can change this by calling an action creator's `.withPayload()` method.
 
 ```js
-const fetchRecipesSuccess = createAction('FETCH_RECIPES_SUCCESS').withPayload()
+const fetchRecipesSuccess = createAction(
+  'FETCH_RECIPES_SUCCESS'
+).withPayload();
 ```
 
 The resulting action creator takes a single argument that is attached to the
@@ -83,7 +85,7 @@ fetchRecipesSuccess([
     ingredients: […],
     directions: '…'
   }
-])
+]);
 // {
 //   type: 'FETCH_RECIPES_SUCCES',
 //   payload: [
@@ -100,11 +102,13 @@ If you use TypeScript, you can use the type parameter of `withPayload()` to
 define the payload's type.
 
 ```ts
-const fetchRecipesSuccess = createAction('FETCH_RECIPES_SUCCESS')
-  .withPayload<Recipe[]>()
+const fetchRecipesSuccess = createAction(
+'FETCH_RECIPES_SUCCESS'
+).withPayload<Recipe[]>();
 
-const fetchRecipesFailure = createAction('FETCH_RECIPES_FAILURE')
-  .withPayload<Error>()
+const fetchRecipesFailure = createAction(
+  'FETCH_RECIPES_FAILURE'
+).withPayload<Error>();
 ```
 
 ## Next Steps
