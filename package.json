@@ -51,5 +51,6 @@
         "@pika/plugin-build-web"
       ]
     ]
-  }
+  },
+  "sideEffects": false
 }
