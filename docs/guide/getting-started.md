@@ -23,7 +23,7 @@ setup. Just import the helpers you need directly from the `redux-preboiled`
 module, for example:
 
 ```js
-import { chainReducers, onAction, withInitialState } from 'redux-preboiled';
+import { chainReducers, onAction } from 'redux-preboiled';
 ```
 
 If you use a module bundler thats supports [tree shaking][tree-shaking] - such
