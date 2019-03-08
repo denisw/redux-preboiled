@@ -7,6 +7,7 @@
 * [Getting Started](./guide/getting-started.md)
 * [Actions](./guide/actions.md)
 * [Reducers](./guide/reducers.md)
+* [Testing](./guide/testing.md)
 
 ## API
 
