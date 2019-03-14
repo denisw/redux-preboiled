@@ -7,29 +7,29 @@ an _action creator_ function to generate actions of that action type.
 ```js
 // Action Types
 
-const FETCH_RECIPES = 'FETCH_RECIPES';
-const FETCH_RECIPES_SUCCESS = 'FETCH_RECIPES_SUCCESS';
-const FETCH_RECIPES_FAILURE = 'FETCH_RECIPES_FAILURE';
+const FETCH_RECIPES = 'FETCH_RECIPES'
+const FETCH_RECIPES_SUCCESS = 'FETCH_RECIPES_SUCCESS'
+const FETCH_RECIPES_FAILURE = 'FETCH_RECIPES_FAILURE'
 
 // Action Creators
 
 const fetchRecipes = () => ({
   type: FETCH_RECIPES
-});
+})
 
 const fetchRecipesSuccess = recipes => ({
   type: FETCH_RECIPES_SUCCESS,
   payload: recipes
-});
+})
 
 const fetchRecipesFailure = error => ({
   type: FETCH_RECIPES_FAILURE,
   payload: error
-});
+})
 ```
 
 This is a straight-forward pattern that offers several benefits over littering
-the entire codebase with inline action type strings and action object literals. 
+the entire codebase with inline action type strings and action object literals.
 However, the resulting code is quite lenghty and quickly becomes tedious to
 read and write.
 
@@ -42,7 +42,9 @@ The [`createAction`](.,/api/createAction.md) helper allows you define an action
 with a single declaration, reducing boilerplate and room for error.
 
 ```js
-const fetchRecipes = createAction('FETCH_RECIPES');
+import { createAction } from 'redux-preboiled'
+
+const fetchRecipes = createAction('FETCH_RECIPES')
 ```
 
 `createAction` returns an action creator for the passed action type. The action
@@ -70,9 +72,8 @@ arguments, and the generated actions have no property other than `type`. However
 you can change this by calling an action creator's `.withPayload()` method.
 
 ```js
-const fetchRecipesSuccess = createAction(
-  'FETCH_RECIPES_SUCCESS'
-).withPayload();
+const fetchRecipesSuccess = 
+  createAction('FETCH_RECIPES_SUCCESS').withPayload()
 ```
 
 The resulting action creator takes a single argument that is attached to the
@@ -80,17 +81,18 @@ returned action as `payload`.
 
 ```js
 fetchRecipesSuccess([
-  { 
-    title: 'Pancakes', 
+  {
+    title: 'Pancakes',
     ingredients: […],
     directions: '…'
   }
 ]);
+// => 
 // {
 //   type: 'FETCH_RECIPES_SUCCES',
 //   payload: [
-//     { 
-//       title: 'Pancakes', 
+//     {
+//       title: 'Pancakes',
 //       ingredients: […],
 //       directions: '…'
 //     }
@@ -102,13 +104,13 @@ If you use TypeScript, you can use the type parameter of `withPayload()` to
 define the payload's type.
 
 ```ts
-const fetchRecipesSuccess = createAction(
-  'FETCH_RECIPES_SUCCESS'
-).withPayload<Recipe[]>();
+// TypeScript
 
-const fetchRecipesFailure = createAction(
-  'FETCH_RECIPES_FAILURE'
-).withPayload<Error>();
+const fetchRecipesSuccess = 
+  createAction('FETCH_RECIPES_SUCCESS').withPayload<Recipe[]>()
+
+const fetchRecipesFailure = 
+  createAction('FETCH_RECIPES_FAILURE').withPayload<Error>()
 ```
 
 ## Next Steps
