@@ -3,15 +3,16 @@ import { BasicActionCreator, PayloadActionCreator } from './types.js'
 /**
  * Returns an action creator that generates actions of the passed type.
  * It also attaches a `type` property to the action creator that allows
- * retrieving the used action type at runtime.
+ * retrieving the corresponding action type at runtime.
  *
- * The generated action creator takes no arguments. However, you can
- * generate a version that takes a `payload` to attach to the action
- * by calling the action creator's `withPayload()` method.
+ * The generated action creator takes no arguments. To create a version
+ * that takes a `payload` and attaches it to the action, call the action
+ * creator's `.withPayload()` method.
  *
  * @param type - The action type for the actions to generate.
+ * @returns An action creator for the action type.
  */
-export default function createAction<T extends string>(
+export default function createAction<T extends string | symbol | number>(
   type: T
 ): BasicActionCreator<T> {
   const actionCreator = () => ({ type })
@@ -26,7 +27,3 @@ export default function createAction<T extends string>(
     withPayload
   })
 }
-
-const fetchRecipesSuccess = createAction(
-  'FETCH_RECIPES_SUCCESS_FOO_BAR'
-).withPayload()

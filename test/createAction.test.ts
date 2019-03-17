@@ -15,7 +15,7 @@ describe('basic action creator', () => {
 
 describe('payload action creator', () => {
   test('creates actions with payload', () => {
-    const addTodo = createAction('addTodo').withPayload()
+    const addTodo = createAction('addTodo').withPayload<string>()
     const action = addTodo('buy milk')
     expect(action).toEqual({ type: 'addTodo', payload: 'buy milk' })
   })
