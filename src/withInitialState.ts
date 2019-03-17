@@ -1,5 +1,5 @@
 import { Action, Reducer } from 'redux'
-import { InitializedReducer } from './types.js'
+import { SubReducer } from './types.js'
 
 /**
  * Returns a reducer that returns the passed initial state when called
@@ -20,7 +20,7 @@ import { InitializedReducer } from './types.js'
  */
 export default function withInitialState<S, A extends Action>(
   initialState: S,
-  reducer?: InitializedReducer<S, A>
+  reducer?: SubReducer<S, A>
 ): Reducer<S, A> {
   return reducer
     ? (state = initialState, action) => reducer(state, action)

@@ -1,5 +1,5 @@
 import { Action, AnyAction, Reducer } from 'redux'
-import { InitializedReducer } from './types.js'
+import { SubReducer } from './types.js'
 
 /**
  * Returns a reducer that calls the passed child reducers in sequence.
@@ -18,7 +18,7 @@ import { InitializedReducer } from './types.js'
  */
 export default function chainReducers<S = any, A extends Action = AnyAction>(
   firstReducer: Reducer<S, A>,
-  ...otherReducers: InitializedReducer<S, A>[]
+  ...otherReducers: SubReducer<S, A>[]
 ): Reducer<S, A> {
   if (!firstReducer) {
     throw new Error('chainReducers() needs at least one reducer.')

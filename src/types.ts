@@ -11,9 +11,9 @@ export interface IntrospectableActionCreator<A extends Action = any>
 
 /**
  * A `IntrospectableActionCreator` that generates simple actions, i.e.
- * actions without no data other than `type`.
+ * actions without any properties other than `type`.
  */
-export interface BasicActionCreator<T = any> {
+export interface SimpleActionCreator<T = any> {
   (): Action<T>
   type: T
   withPayload<P = any>(): PayloadActionCreator<P, T>
@@ -29,7 +29,7 @@ export interface PayloadAction<P = any, T = any> extends Action<T> {
 }
 
 /**
- * A `IntrospectableActionCreator` that generates payload actions.
+ * An `IntrospectableActionCreator` that generates payload actions.
  */
 export interface PayloadActionCreator<P, T> {
   (payload: P): PayloadAction<P, T>
@@ -37,11 +37,9 @@ export interface PayloadActionCreator<P, T> {
 }
 
 /**
- * A reducer-like function that assumes the initial state is provided
- * externally, i.e. that it is always called with a defined state. Can
- * be converted to a proper reducer with `withInitialState()` helper to
- * turn an initialized reducer to a full reducer.
+ * A reducer-like function that assumes the initial state is provided by a
+ * parent reducer, i.e. that it is never called with an `undefined` state.
  */
-export interface InitializedReducer<S = any, A extends Action = AnyAction> {
+export interface SubReducer<S = any, A extends Action = AnyAction> {
   (state: S, action: A): S
 }

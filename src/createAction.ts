@@ -1,4 +1,4 @@
-import { BasicActionCreator, PayloadActionCreator } from './types.js'
+import { SimpleActionCreator, PayloadActionCreator } from './types.js'
 
 /**
  * Returns an action creator that generates actions of the passed type.
@@ -14,7 +14,7 @@ import { BasicActionCreator, PayloadActionCreator } from './types.js'
  */
 export default function createAction<T extends string | symbol | number>(
   type: T
-): BasicActionCreator<T> {
+): SimpleActionCreator<T> {
   const actionCreator = () => ({ type })
 
   function withPayload<P>(): PayloadActionCreator<P, T> {
