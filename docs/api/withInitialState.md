@@ -15,14 +15,14 @@ function withInitialState(state, subReducer?)
 function withInitialState<S, A extends Action>(
   initialState: S,
   reducer?: InitializedReducer<S, A>
-): Reducer<S, A> 
+): Reducer<S, A>
 ```
 
 ## Details
 
 Given a value, `withInitialState` creates a reducer which provides that value
 as the initial state - that is, the reducer returns the value if called with the
-state  `undefined`. 
+state `undefined`.
 
 If a `subReducer` is passed, the reducer will delegate to it once the state
 has been initialized. Used this way, `withInitialState` basically converts a
@@ -33,8 +33,7 @@ Without `subReducer`, the reducer will simply return any non-`undefined` state
 it receives. This means it will not make any state changes after the initial
 state has been provided. This form of `withInitialState` is meant to be used
 as building block for reducer chains built with
-[`chainReducers`](./chainReducers.md) 
-
+[`chainReducers`](./chainReducers.md).
 
 ## Examples
 
