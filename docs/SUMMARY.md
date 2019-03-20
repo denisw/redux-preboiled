@@ -11,7 +11,9 @@
 
 ## API
 
-* [createAction](./api/createAction.md)
 * [chainReducers](./api/chainReducers.md)
+* [createAction](./api/createAction.md)
+* [getInitialState](./api/getInitialState.md)
 * [onAction](./api/onAction.md)
+* [reduceActions](./api/reduceActions.md)
 * [withInitialState](./api/withInitialState.md)
