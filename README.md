@@ -1,6 +1,6 @@
 # Redux Preboiled
 
-![Logo](./logo/logo.png)
+![](./logo/logo.png)
 
 Redux Preboiled is a collection of boilerplate-reducing functions for
 [Redux][redux] applications. It is built with the following goals in
