@@ -56,20 +56,18 @@ multiply(2)
 // => { type: 'multiply', payload: 2 }
 
 // Preboiled comes with several helpers for composing reducers.
-// Below we use:
+// Below we re-create the `switch (action.type)` pattern with:
 //
-// - `onAction`, which lets us create action-type-specific sub-reducers. 
-//    We can directly pass a `createAction` action creator to it; in 
-//    TypeScript, this will cause the `action` parameter's type to
-//    be inferred automatically.
+// - `onAction`, which lets us create action-specific sub-reducers. 
+//    We directly pass the `createAction` action creators to it; in 
+//    TypeScript, this gives us automatic type inference for the 
+//    sub-reducer's `action` parameter.
 //
 //  - `withInitialState`, which provides the initial state for the
 //    sub-reducers.
 //
-//  - `chainReducers`, which pulls everything together.
-//
-// Together, these helpers replaces the common `switch (action.type)` 
-// pattern with something more concise.
+//  - `chainReducers`, which pulls everything together by arranging
+//    its child reducers into a pipeline (or "call chain").
 const counterReducer = chainReducers(
   withInitialState(0),
   onAction(increment, state => state + 1),
