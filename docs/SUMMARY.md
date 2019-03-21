@@ -11,6 +11,7 @@
 
 ## API
 
+* [API Index](./api/README.md)
 * [chainReducers](./api/chainReducers.md)
 * [createAction](./api/createAction.md)
 * [getInitialState](./api/getInitialState.md)
