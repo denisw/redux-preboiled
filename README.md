@@ -38,9 +38,8 @@ import {
 } from 'redux-preboiled'
 
 // `createAction` lets you define an action with minimal ceremony.
-// It generates an action creator for a given action type and adds
-// a `type` property to it. The latter removes the need to define a
-// separate action type constant.
+// It gives an action creator with a `type` property, removing the
+// need for a separate action type constant.
 const increment = createAction('increment')
 
 increment()
@@ -49,34 +48,28 @@ increment()
 increment.type
 // => 'increment'
 
-// If you call `createAction(...).withPayload()`, the action creator
-// takes a value which is attached to the action as `payload`. In
-// TypeScript, you can specify the payload type using a type
-// parameter, e.g. `withPayload<number>()`.
+// When caling `createAction(…).withPayload()`, the action creator 
+// accepts a payload to attach to the returned action.
 const multiply = createAction('multiply').withPayload()
 
 multiply(2)
 // => { type: 'multiply', payload: 2 }
 
-// Redux Preboiled comes with several helpers for composing reducers.
-// Below we use the following ones:
+// Preboiled comes with several helpers for composing reducers.
+// Below we use:
 //
-// - `onAction`, which creates a sub-reducer for a specific action
-//   type. You can directly pass a `createAction` action creator to
-//   in place of an action type value. (In TypeScript, this allows 
-//   the compiler to infer the type of the `action` parameter 
-//   automatically.)
+// - `onAction`, which lets us create action-type-specific sub-reducers. 
+//    We can directly pass a `createAction` action creator to it; in 
+//    TypeScript, this will cause the `action` parameter's type to
+//    be inferred automatically.
 //
-//  - `withInitialState`, which can be used to provide an initial 
-//    state for sub-reducers that have none (like the ones returned 
-//    by `onAction`).
+//  - `withInitialState`, which provides the initial state for the
+//    sub-reducers.
 //
-//  - `chainReducers`, which composes a sequence of reducers into a
-//    "call chain" where each sub-reducer's result is forwarded to 
-//    the next sub-reducer in the chain.
+//  - `chainReducers`, which pulls everything together.
 //
-// Together, these helpers can replace the `switch (action.type)`
-// pattern that's commonly used in Redux apps.
+// Together, these helpers replaces the common `switch (action.type)` 
+// pattern with something more concise.
 const counterReducer = chainReducers(
   withInitialState(0),
   onAction(increment, state => state + 1),
@@ -93,15 +86,12 @@ counterReducer(2, multiply(4))
 // => 8
 
 // Redux Preboiled is just a utility library, so there is no special 
-// setup to do or middleware to install. Just do everything else as
-// usual.
+// setup to do or middleware to install. 
 
 const store = createStore(counterReducer)
-
 store.dispatch(increment())
 store.dispatch(increment())
 store.dispatch(multiply(2))
-
 store.getState()
 // => 4
 ```
