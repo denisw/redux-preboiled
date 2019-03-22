@@ -5,7 +5,7 @@ import { SimpleActionCreator, PayloadActionCreator } from './types.js'
  * It also attaches a `type` property to the action creator that allows
  * retrieving the corresponding action type at runtime.
  *
- * The generated action creator takes no arguments. To create a version
+ * The returned action creator takes no arguments. To create a version
  * that takes a `payload` and attaches it to the action, call the action
  * creator's `.withPayload()` method.
  *

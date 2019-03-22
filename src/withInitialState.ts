@@ -5,7 +5,7 @@ import { SubReducer } from './types.js'
  * Returns a reducer that returns the passed initial state when called
  * with an `undefined` state (i.e., during store initialization).
  *
- * If a child reducer function is passed to `withInitialState()`, the
+ * If a child reducer function is passed to `withInitialState`, the
  * generated reducer will delegate all calls to that function. If the
  * input state is `undefined`, it will substitute the specified initial
  * state. This ensures that the child reducer doesn't need to provide an
