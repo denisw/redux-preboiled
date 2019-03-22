@@ -1,10 +1,10 @@
 import { Action, ActionCreator, AnyAction } from 'redux'
 
 /**
- * An action creator that exposes the associated actino type through a
+ * An action creator that exposes the associated action type through a
  * `type` property.
  */
-export interface IntrospectableActionCreator<A extends Action = any>
+export interface IntrospectableActionCreator<A extends Action = AnyAction>
   extends ActionCreator<A> {
   type: A extends Action<infer T> ? T : never
 }

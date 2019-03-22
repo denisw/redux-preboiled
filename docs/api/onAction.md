@@ -54,6 +54,18 @@ If you specify the action type using a `createAction` action creator, the type
 of the `getNextState` function's `action` parameter will be automatically
 inferred from the type of the action creator.
 
+```ts
+import { createAction, onAction } from 'redux-preboiled'
+
+const multiply = createAction('multiply').withPayload<number>()
+// multiply: PayloadActionCreator<number>
+
+const multiplySubReducer = onAction('multiply', (state, action) => {
+  // action: PayloadAction<number, 'multiply'>
+  return state * action.payload
+})
+```
+
 ## Examples
 
 Basic usage:
