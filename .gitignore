@@ -5,5 +5,8 @@ npm-debug.log*
 # @pika/pack
 pkg
 
+# Jest
+coverage/
+
 # misc
 .DS_Store
