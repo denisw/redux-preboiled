@@ -2,12 +2,16 @@
 
 Defining Redux [actions][redux-actions] commonly involves two declarations: an
 _action type constant_ that stores the `type` value to use for the action, and
-an _action creator_ function to generate actions of that type.
+an _action creator_ to generate actions of that type.
 
 ```js
+// Action Types
+
 const FETCH_RECIPES = 'FETCH_RECIPES'
 const FETCH_RECIPES_SUCCESS = 'FETCH_RECIPES_SUCCESS'
 const FETCH_RECIPES_FAILURE = 'FETCH_RECIPES_FAILURE'
+
+// Action Creators
 
 const fetchRecipes = () => ({
   type: FETCH_RECIPES
@@ -26,7 +30,7 @@ const fetchRecipesFailure = error => ({
 
 This is a straight-forward and useful pattern, but also a quite verbose one.
 In this guide we are going to explore Redux Preboiled's `createAction` helper,
-which reduces the noise while retaining the same benefits. 
+which reduces the noise while retaining the same benefits.
 
 ## Defining Actions
 
@@ -57,7 +61,7 @@ place of an action type value. For instance, the `onAction` helper (described
 in the [Reducers](./reducers.md) guide) lets you write `onAction(fetchRecipes,
 …)` instead of `onAction(fetchRecipes.type, …)`. This is especially beneficial
 in TypeScript as the type information carried by the action creator can be
-[used for type inference](../api/onAction.md#typescript-notes). 
+[used for type inference](../api/onAction.md#typescript-notes).
 
 ## Adding Action Payloads
 
@@ -67,7 +71,7 @@ However, you can change this by calling an action creator's `.withPayload()`
 method.
 
 ```js
-const fetchRecipeSuccess = 
+const fetchRecipeSuccess =
   createAction('FETCH_RECIPE_SUCCESS').withPayload()
 ```
 
@@ -80,7 +84,7 @@ fetchRecipesSuccess({
   ingredients: ['eggs', 'salt'],
   directions: '…'
 });
-// => 
+// =>
 // {
 //   type: 'fetchRecipeSuccess',
 //   payload: {
@@ -97,11 +101,11 @@ define the payload's type.
 ```ts
 // TypeScript
 
-const fetchRecipeSuccess = 
+const fetchRecipeSuccess =
   createAction('FETCH_RECIPE_SUCCESS').withPayload<Recipe>()
 
 // fetchRecipeSuccess: PayloadActionCreator<
-//  Recipe, 
+//  Recipe,
 //  'FETCH_RECIPE_SUCCESS'
 // >
 ```
