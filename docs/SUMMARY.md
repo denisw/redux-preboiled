@@ -2,7 +2,7 @@
 
 * [Introduction](../README.md)
 
-## Guide
+## Guides
 
 * [Getting Started](./guide/getting-started.md)
 * [Actions](./guide/actions.md)
@@ -11,7 +11,7 @@
 
 ## API
 
-* [API Index](./api/README.md)
+* [Overview](./api/README.md)
 * [chainReducers](./api/chainReducers.md)
 * [createAction](./api/createAction.md)
 * [getInitialState](./api/getInitialState.md)

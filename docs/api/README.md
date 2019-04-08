@@ -1,4 +1,4 @@
-# API Index
+# API Overview
 
 Below you'll find links to the API documentation pages of all Redux Preboiled
 helpers, grouped by topic.
