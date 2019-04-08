@@ -1,6 +1,6 @@
-# Redux Preboiled
+# Introduction
 
-![](./logo/logo.png)
+![](../logo/logo.png)
 
 Redux Preboiled is a collection of boilerplate-reducing helper functions
 for [Redux][redux] applications. It is built with the following goals in
@@ -20,17 +20,6 @@ mind:
   or sacrifice type information (e.g., dynamically generated property
   names). It also minimizes typing effort by allowing for type inference
   wherever possible.
-
-
-## Installation
-
-```sh
-# NPM
-npm install redux-preboiled
-
-# Yarn
-yarn add redux-preboiled
-```
 
 ## A First Taste
 
@@ -99,24 +88,20 @@ const counterReducer = chainReducers(
   one line each. Note that we don't lose the [benefits of separate action type
   constants][redux-action-types] as Preboiled makes the action types available
   as `increment.type` and `multiply.type`, respectively. See the
-  [Actions][docs-actions] guide.
+  [Actions](./guides/actions.md) guide.
 
 * We combine `onAction`, `withInitialState` and `chainReducers` for a slightly
   less noisy alternative to the `switch` reducer pattern. In TypeScript, this
   variant is also more type-safe: based on the type of the action creator passed
   to `onAction`, the compiler can automatically infer the type of the handler
-  function's `action` parameter. See the [Reducers][docs-reducers] guide.
+  function's `action` parameter. See the [Reducers](./docs/reducers.md) guide.
 
 ## Next Steps
 
-See the [guides][docs-guides] for a tour through Preboiled, or jump
-right to the [API docs][docs-api] for detailed descriptions of all helpers
-Redux Preboiled has to offer.
+The [Getting Started](./guides/getting-started.md) guide shows you how to install and use Redux Preboiled. From there you can take a tour through the offered helpers by following the links to the other guides.
 
-[docs-actions]: https://redux-preboiled.gitbook.io/docs/guides/actions
-[docs-api]: https://redux-preboiled.gitbook.io/docs/api/api
-[docs-guides]: https://redux-preboiled.gitbook.io/docs/guides/getting-started
-[docs-reducers]: https://redux-preboiled.gitbook.io/docs/guides/reducers
-[redux-action-types]: https://redux.js.org/faq/actions#why-should-type-be-a-string-or-at-least-serializable-why-should-my-action-types-be-constants
+For reference documentation, see to the [API docs](./api/README.md).
+
 [redux]: https://redux.js.org/
+[redux-action-types]: https://redux.js.org/faq/actions#why-should-type-be-a-string-or-at-least-serializable-why-should-my-action-types-be-constants
 [ts]: https://www.typescriptlang.org/
