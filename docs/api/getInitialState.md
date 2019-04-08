@@ -31,7 +31,7 @@ Basic usage:
 ```js
 import { getInitialState } from 'redux-preboiled'
 
-const reducer = (state = 0, action) => 
+const reducer = (state = 0, action) =>
   action.type === 'increment' ? state + 1 : state
 
 
@@ -44,7 +44,7 @@ Usage in [Jest][jest]:
 ```js
 import { getInitialState } from 'redux-preboiled'
 
-const reducer = (state = 0, action) => 
+const reducer = (state = 0, action) =>
   action.type === 'increment' ? state + 1 : state
 
 test('initial state is 0', () => {
@@ -54,6 +54,6 @@ test('initial state is 0', () => {
 
 ## See Also
 
-- [Testing](../guide/testing.md) guide
+- [Testing](../guides/testing.md) guide
 
 [jest]: https://jestjs.io/

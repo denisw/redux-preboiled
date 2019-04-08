@@ -25,7 +25,7 @@ By default, the returned action creator doesn't take any arguments and
 generates only simple actions with just a `type`. However, it is possible to
 create a *payload action creator* by calling the
 `createAction(…).withPayload()` method. Such an action creator takes a single
-value and adds that to the generated action as `action.payload`. 
+value and adds that to the generated action as `action.payload`.
 
 The action type passed to `createAction` is directly attached to the action
 creator as a property named `type`. This allows other helpers, such as
@@ -79,13 +79,13 @@ multiply(2)
 // OK
 
 multiply('2')
-// ERROR: Argument of type '2' is not assignable to parameter of 
+// ERROR: Argument of type '2' is not assignable to parameter of
 // type 'number'.
 ```
 
 ## See Also
 
-- [Actions](../guide/actions.md) guide
+- [Actions](../guides/actions.md) guide
 - [onAction](./onAction.md)
 
 [redux-action-creators]: https://redux.js.org/basics/actions#action-creators

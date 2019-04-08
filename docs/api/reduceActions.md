@@ -55,7 +55,7 @@ reduceActions(reducer, { type: 'increment' })
 // => 1
 
 reduceActions(
-  reducer, 
+  reducer,
   { type: 'increment' },
   { type: 'increment' },
   { type: 'multiply', payload: 2 }
@@ -93,7 +93,7 @@ test('fetchRecipe sets loading flag', () => {
 
 test('fetchRecipeSuccess unsets loading flag', () => {
   const state = reduceActions(
-    reducer, 
+    reducer,
     { type: 'fetchRecipe' },
     { type: 'fetchRecipeSuccess' }
   )
@@ -103,6 +103,6 @@ test('fetchRecipeSuccess unsets loading flag', () => {
 
 ## See Also
 
-- [Testing](../guide/testing.md) guide
+- [Testing](../guides/testing.md) guide
 
 [jest]: https://jestjs.io/

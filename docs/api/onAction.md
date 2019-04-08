@@ -107,5 +107,5 @@ subReducer(2, increment())
 
 ## See Also
 
-- [Reducers](../guide/reducers.md) guide
+- [Reducers](../guides/reducers.md) guide
 - [`createAction`](./createAction.md)

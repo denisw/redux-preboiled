@@ -21,7 +21,7 @@ function chainReducers<S = any, A extends Action = AnyAction>(
 
 Given a sequence of (sub-)reducers, `chainReducers` creates a reducer which
 forwards incoming actions to each of these "child" reducers. More
-specifically, the reducer: 
+specifically, the reducer:
 
 1. calls the first child reducer with the received state
 2. passes the resulting state (and the same action) to the next reducer
@@ -32,17 +32,17 @@ Note that the first child reducer in the chain is the only one which needs to
 handle an `undefined` state by returning the initial state; all others can be
 *sub-reducers* - such as the ones returned by [`onAction`](./onAction.md) -
 which assume that they are only ever called with a defined,
-already-initialized state. 
+already-initialized state.
 
 ## Examples
 
 Chaining `withInitialState` and `onAction` reducers:
 
 ```js
-import { 
-  chainReducers, 
-  onAction, 
-  withInitialState 
+import {
+  chainReducers,
+  onAction,
+  withInitialState
 } from 'redux-preboiled'
 
 const reducer = chainReducers(
@@ -63,6 +63,6 @@ reducer(2, { type: 'multiply', payload: 4 })
 
 ## See Also
 
-* [Reducers](../guide/reducers.md) guide
+* [Reducers](../guides/reducers.md) guide
 * [onAction](./onAction.md)
 * [withInitialState](./withInitialState.md)

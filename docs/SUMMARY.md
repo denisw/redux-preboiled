@@ -4,10 +4,10 @@
 
 ## Guides
 
-* [Getting Started](./guide/getting-started.md)
-* [Actions](./guide/actions.md)
-* [Reducers](./guide/reducers.md)
-* [Testing](./guide/testing.md)
+* [Getting Started](./guides/getting-started.md)
+* [Actions](./guides/actions.md)
+* [Reducers](./guides/reducers.md)
+* [Testing](./guides/testing.md)
 
 ## API
 
