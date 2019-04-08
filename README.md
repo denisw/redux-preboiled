@@ -105,8 +105,8 @@ See the [guides][docs-guides] for a tour through Preboiled, or jump
 right to the [API docs][docs-api] for detailed descriptions of all helpers
 Redux Preboiled has to offer.
 
-[docs-actions]: https://redux-preboiled.gitbook.io/docs/guide/actions
+[docs-actions]: https://redux-preboiled.gitbook.io/docs/guides/actions
 [docs-api]: https://redux-preboiled.gitbook.io/docs/api/api
-[docs-guides]: https://redux-preboiled.gitbook.io/docs/guide/getting-started
-[docs-reducers]: https://redux-preboiled.gitbook.io/docs/guide/reducers
+[docs-guides]: https://redux-preboiled.gitbook.io/docs/guides/getting-started
+[docs-reducers]: https://redux-preboiled.gitbook.io/docs/guides/reducers
 [redux-action-types]: https://redux.js.org/faq/actions#why-should-type-be-a-string-or-at-least-serializable-why-should-my-action-types-be-constants
