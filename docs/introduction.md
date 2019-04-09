@@ -14,7 +14,7 @@ creators, and tests.
   to your application's build output.
 
 - **Minimal magic.** Preboiled avoids clever "magic" tricks which minimize
-- boilerplate at the expense of understandability. Instead, it favors simple,
+  boilerplate at the expense of understandability. Instead, it favors simple,
   composable functions with easy-to-understand semantics and implementations.
 
 - **TypeScript-friendly.** Redux Preboiled is written in 
