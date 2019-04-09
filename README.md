@@ -1,9 +1,12 @@
 
 # Redux Preboiled
 
+![npm](https://img.shields.io/npm/dw/redux-preboiled.svg)
+[![Build Status](https://travis-ci.org/denisw/redux-preboiled.svg?branch=master)](https://travis-ci.org/denisw/redux-preboiled)
+
 ![](./logo/logo.png)
 
-[Documentation][docs]
+[**Documentation**][docs]
 
 Redux Preboiled is a collection of general-purpose [Redux][redux] helper
 functions. It helps you reduce boilerplate when writing reducers, action
