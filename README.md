@@ -1,26 +1,27 @@
+
 # Redux Preboiled
 
 ![](./logo/logo.png)
 
-Redux Preboiled is a collection of boilerplate-reducing helper functions
-for [Redux][redux] applications. It is built with the following goals in
-mind:
+[Documentation][docs]
 
-- **_À la carte_ design.** Preboiled's helpers are designed to be largely
-  independent from each other, which allows you to pick and choose
-  the ones you need without being burdened by the rest.
+Redux Preboiled is a collection of general-purpose [Redux][redux] helper
+functions. It helps you reduce boilerplate when writing reducers, action
+creators, and tests.
 
-- **Minimal magic.** While Preboiled should reduce the code needed for
-  common Redux patterns, it shouldn't do so at the expense of readability.
-  Clever metaprogramming techniques and other magic are avoided in favor of
-  straight-forward functions with easy-to-understand implementations.
+- **Served _à la carte_.** Each of Preboiled's helpers can be used stand-alone.
+  Just pick and use the ones you want and ignore the rest. If your build setup
+  does [tree shaking][tree-shaking], the unused helpers won't even be added 
+  to your application's build output.
 
-- **Typing friendliness.** Preboiled is written in [TypeScript][ts]
-  and maximizes its benefits by avoiding patterns that are hard to type
-  or sacrifice type information (e.g., dynamically generated property
-  names). It also minimizes typing effort by allowing for type inference
-  wherever possible.
+- **Minimal magic.** Preboiled avoids clever "magic" tricks which minimize
+  boilerplate at the expense of understandability. Instead, it favors simple,
+  composable functions with easy-to-understand semantics and implementations.
 
+- **TypeScript-friendly.** Redux Preboiled is written in 
+  [TypeScript][typescript]. Its helpers are designed to be easy to type and 
+  amenable to automatic type inference, making it easy to write type-safe 
+  Redux code.
 
 ## Installation
 
@@ -34,44 +35,9 @@ yarn add redux-preboiled
 
 ## A First Taste
 
-Consider the following vanilla Redux code for a simple counter:
-
-```js
-// Action Types
-
-const INCREMENT = 'increment'
-const MULTIPLY = 'multiply'
-
-// Action Creators
-
-function increment() {
-  return {
-    type: INCREMENT
-  }
-}
-
-function multiply(amount) {
-  return {
-    type: MULTIPLY,
-    payload: amount
-  }
-}
-
-// Reducer
-
-function counterReducer(state = 0, action) {
-  switch (action.type) {
-    case INCREMENT:
-      return state + 1
-    case MULTIPLY:
-      return state * action.payload
-    default:
-      return state
-  }
-}
-```
-
-With Redux Preboiled, this can be reduced to:
+The following snippet uses a bunch of Redux Preboiled's helpers to define a
+simple Redux counter module with support for `increment` and `multiply` 
+actions. It is about half the size of the equivalent vanilla Redux code.
 
 ```js
 import {
@@ -81,42 +47,51 @@ import {
   withInitialState
 } from 'redux-preboiled'
 
-// Actions
-
 const increment = createAction('increment')
 const multiply = createAction('multiply').withPayload()
-
-// Reducer
 
 const counterReducer = chainReducers(
   withInitialState(0),
   onAction(increment, state => state + 1),
-  onAction(multiply, (state, { payload }) => state * payload)
+  onAction(multiply, (state, action) => state * action.payload)
 )
+
+// Example usage:
+
+import { createStore } from 'redux'
+
+const store = createStore(counterReducer)
+store.dispatch(increment())
+store.dispatch(increment())
+store.dispatch(multiply(2))
+store.getState()
+// => 4
 ```
 
-* Using the `createAction` helper, we can define the action creators with just
-  one line each. Note that we don't lose the [benefits of separate action type
-  constants][redux-action-types] as Preboiled makes the action types available
-  as `increment.type` and `multiply.type`, respectively. See the
-  [Actions][docs-actions] guide.
+* `createAction` generates various types of action creator functions with
+  minimal cerenomy. The specified action type value is made available as an
+  action creator property (`increment.type` and `mutliply.type` in this
+  example), making separate action type constants unnecessary. See the
+  [Actions](./guides/actions.md) guide.
 
-* We combine `onAction`, `withInitialState` and `chainReducers` for a slightly
-  less noisy alternative to the `switch` reducer pattern. In TypeScript, this
-  variant is also more type-safe: based on the type of the action creator passed
-  to `onAction`, the compiler can automatically infer the type of the handler
-  function's `action` parameter. See the [Reducers][docs-reducers] guide.
+* The `onAction`, `withInitialState` and `chainReducers` helpers can be 
+  combined as a less noisy alternative to the classic `switch` reducer 
+  pattern. In TypeScript, the type of the sub-reducers' `action` parameters 
+  are automatically inferred from the action creators passed to `onAction`,
+  improving type safety and editor auto-completion. See the 
+  [Reducers](./guides/reducers.md) guide.
 
-## Next Steps
+## Documentation
 
 See the [guides][docs-guides] for a tour through Preboiled, or jump
 right to the [API docs][docs-api] for detailed descriptions of all helpers
 Redux Preboiled has to offer.
 
+[docs]: https://redux-preboiled.gitbook.io/docs/
 [docs-actions]: https://redux-preboiled.gitbook.io/docs/guides/actions
 [docs-api]: https://redux-preboiled.gitbook.io/docs/api/api
 [docs-guides]: https://redux-preboiled.gitbook.io/docs/guides/getting-started
 [docs-reducers]: https://redux-preboiled.gitbook.io/docs/guides/reducers
-[redux-action-types]: https://redux.js.org/faq/actions#why-should-type-be-a-string-or-at-least-serializable-why-should-my-action-types-be-constants
 [redux]: https://redux.js.org/
-[ts]: https://www.typescriptlang.org/
+[tree-shaking]: https://developers.google.com/web/fundamentals/performance/optimizing-javascript/tree-shaking/
+[typescript]: https://www.typescriptlang.org/

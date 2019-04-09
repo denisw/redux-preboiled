@@ -79,6 +79,5 @@ tour through Redux Preboiled's helpers.
 For reference documentation, see the [API docs](./api/README.md).
 
 [redux]: https://redux.js.org/
-[redux-action-types]: https://redux.js.org/faq/actions#why-should-type-be-a-string-or-at-least-serializable-why-should-my-action-types-be-constants
 [tree-shaking]: https://developers.google.com/web/fundamentals/performance/optimizing-javascript/tree-shaking/
 [typescript]: https://www.typescriptlang.org/
