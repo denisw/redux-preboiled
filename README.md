@@ -72,7 +72,7 @@ store.getState()
 ```
 
 * `createAction` generates various types of action creator functions with
-  minimal cerenomy. The specified action type value is made available as an
+  minimal ceremony. The specified action type value is made available as an
   action creator property (`increment.type` and `mutliply.type` in this
   example), making separate action type constants unnecessary. See the
   [Actions](./guides/actions.md) guide.
