@@ -1,119 +1,125 @@
 # Actions
 
-Defining Redux [actions][redux-actions] commonly involves two declarations: an
-_action type constant_ that stores the `type` value to use for the action, and
-an _action creator_ to generate actions of that type.
+Defining [Redux actions][redux-actions] commonly involves two declarations: an
+_action type constant_ with the `type` value to use, and an _action creator_ to
+generate actions of that type.
 
 ```js
-// Action Types
+const INCREMENT = 'counter/increment'
+const DECREMENT = 'counter/decrement'
+const MULTIPLY = 'counter/multiply'
 
-const FETCH_RECIPES = 'FETCH_RECIPES'
-const FETCH_RECIPES_SUCCESS = 'FETCH_RECIPES_SUCCESS'
-const FETCH_RECIPES_FAILURE = 'FETCH_RECIPES_FAILURE'
-
-// Action Creators
-
-const fetchRecipes = () => ({
-  type: FETCH_RECIPES
+const increment = () => ({
+  type: INCREMENT
 })
 
-const fetchRecipesSuccess = recipes => ({
-  type: FETCH_RECIPES_SUCCESS,
-  payload: recipes
+const decrement = () => ({
+  type: DECREMENT
 })
 
-const fetchRecipesFailure = error => ({
-  type: FETCH_RECIPES_FAILURE,
-  payload: error
+const multiply = amount => ({
+  type: MULTIPLY,
+  payload: amount
 })
 ```
 
-This is a straight-forward and useful pattern, but also a quite verbose one.
-In this guide we are going to explore Redux Preboiled's `createAction` helper,
-which reduces the noise while retaining the same benefits.
-
-## Defining Actions
-
-The [`createAction`](./api/createAction.md) helper allows you define an
-action with a single declaration, minimizing boilerplate and room for error.
-Given an action type value, it returns a matching action creator.
+This is a straight-forward pattern [with several
+upsides][redux-actions-boilerplate], but it's also a quite verbose one. 
+Preboiled's [`createAction`](./createAction.md) helper, described in this
+guide, helps you reduce the noise while keeping the benefits. Here is the
+equivalent code using `createAction`:
 
 ```js
 import { createAction } from 'redux-preboiled'
 
-const fetchRecipes = createAction('FETCH_RECIPES')
-
-fetchRecipes()
-// => { type: 'FETCH_RECIPES' }
+const increment = createAction('counter/increment')
+const decrement = createAction('counter/decrement')
+const multiply = createAction('counter/multiply').withPayload()
 ```
 
-The action type is directly attached to the returned action creator as `type`
-(e.g., `fetchRecipes.type` in the example above). This means you don't need to
-define a separate action type constant.
+The following sections explain `createAction` and its capabilities in more
+detail.
+
+## Simple Actions
+
+The `createAction` helper allows you define an action with a single
+declaration, minimizing boilerplate and room for error. Given an action type
+value, it returns a matching action creator.
 
 ```js
-fetchRecipes.type
-// => 'FETCH_RECIPES'
+import { createAction } from 'redux-preboiled'
+
+const increment = createAction('counter/increment')
+
+increment()
+// => { type: 'counter/increment' }
 ```
 
-This also enables other helpers to accept a `createAction` action creator in
-place of an action type value. For instance, the `onAction` helper (described
-in the [Reducers](./reducers.md) guide) lets you write `onAction(fetchRecipes,
-…)` instead of `onAction(fetchRecipes.type, …)`. This is especially beneficial
-in TypeScript as the type information carried by the action creator can be
-[used for type inference](../api/onAction.md#typescript-notes).
-
-## Adding Action Payloads
-
-By default, the action creators returned by `createAction` don't take any
-arguments, and the generated actions carry nothing else than a `type`.
-However, you can change this by calling an action creator's `.withPayload()`
-method.
+The action type value is made available as a `type` property on the returned
+actions creator (e.g., `increment.type` in the example above). This means
+you don't need to define a separate action type constant.
 
 ```js
-const fetchRecipeSuccess =
-  createAction('FETCH_RECIPE_SUCCESS').withPayload()
+increment.type
+// => 'increment'
 ```
 
-The resulting action creator takes a single argument that is attached to the
-returned action as `payload`.
+The `type` property also enables other helpers to accept a `createAction`
+action creator in place of an action type value. For instance, `onAction`
+(described in the [Reducers guide](./reducers.md)) lets you specify the action
+type by directly passing `increment` instead of `increment.type` or
+`'counter/increment'`. This is especially beneficial if you use TypeScript,
+where the action creator's static type is [used for automatic type
+inference](../api/onAction.md#typescript-notes).
+
+By default, the action creators returned by `createAction` produce simple
+actions with nothing more than a `type`. But this can be changed, as described
+in the next section.
+
+## Payload Actions
+
+Often, you need to add extra data to actions. For these cases, `createAction`
+allows you to generate _payload action creators_. These take a single argument
+and attach it to the returned action as `payload`.
+
+To make a payload action creator, call `.withPayload()` on an action creator
+returned by `createAction`:
 
 ```js
-fetchRecipesSuccess({
-  title: 'Scrambled Eggs',
-  ingredients: ['eggs', 'salt'],
-  directions: '…'
-});
-// =>
-// {
-//   type: 'fetchRecipeSuccess',
-//   payload: {
-//     title: 'Scrambled Egss',
-//     ingredients: ['eggs', 'salt'],
-//     directions: '…'
-//   }
-// }
+const multiply = createAction('counter/multiply').withPayload()
+
+multiply(2)
+// => { type: 'counter/multiply', payload: 2 }
 ```
 
-If you use TypeScript, you can use the type parameter of `withPayload()` to
-define the payload's type.
+In TypeScript, you can specify the type of the payload as a type parameter:
 
 ```ts
 // TypeScript
 
-const fetchRecipeSuccess =
-  createAction('FETCH_RECIPE_SUCCESS').withPayload<Recipe>()
+const multiply = 
+  createAction('counter/multiply').withPayload<number>()
+```
 
-// fetchRecipeSuccess: PayloadActionCreator<
-//  Recipe,
-//  'FETCH_RECIPE_SUCCESS'
-// >
+If you need to attach more than one value to an action, you can use an object
+as payload:
+
+```
+const logIn = createAction('auth/logIn').withPayload()
+
+login({ username: 'alice', password: 'ecila' })
+// => 
+// { 
+//   type: 'auth/logIn',
+//   payload: { username: 'alice', password: 'ecila' }
+// }
 ```
 
 ## Next Steps
 
-Once you have your actions defined, you can write reducers to handle them. See
-the [Reducers](./reducers.md) guide to find out how Redux Preboiled can help
-you there.
+Defining actions is one thing, but you also need the reducers to handle them.
+Redux Preboiled can help you with that too, as you'll see in the [Reducers
+guide](./reducers.md). 
 
 [redux-actions]: https://redux.js.org/basics/actions
+[redux-actions-boilerplate]: https://redux.js.org/recipes/reducing-boilerplate#actions 
