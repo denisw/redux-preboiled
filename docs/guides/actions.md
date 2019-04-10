@@ -5,6 +5,8 @@ _action type constant_ with the `type` value to use, and an _action creator_ to
 generate actions of that type.
 
 ```js
+// Without Preboiled
+
 const INCREMENT = 'counter/increment'
 const DECREMENT = 'counter/decrement'
 const MULTIPLY = 'counter/multiply'
@@ -30,6 +32,8 @@ guide, helps you reduce the noise while keeping the benefits. Here is the
 equivalent code using `createAction`:
 
 ```js
+// With Preboiled
+
 import { createAction } from 'redux-preboiled'
 
 const increment = createAction('counter/increment')
