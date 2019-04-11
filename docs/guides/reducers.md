@@ -1,8 +1,7 @@
 # Reducers
 
-In many Redux apps, [reducers][redux-reducers] are written using `switch`
-statements for each action type and then grouped together using
-[`combineReducers`][redux-combine-reducers].
+Redux [reducers][redux-reducers] are usually written using `switch` statements,
+which each case handling a specific action type.
 
 ```js
 function counterReducer(state = 0, action) {
@@ -17,85 +16,75 @@ function counterReducer(state = 0, action) {
       return state
   }
 }
-
-// …
-
-const rootReducer = combineReducers({
-  counter: counterReducer,
-  …
-})
 ```
 
-This works well. However, we can do better. Redux Preboiled's reducer helpers
-offer the following benefits over the `switch` pattern:
+This pattern works reasonably well, but also has drawbacks:
 
-- Slightly less boilerplate code (e.g., no repeated `switch (action.type) {`).
-- Less room for mistakes (e.g., forgetting the `default: return state` case).
-- Increased type system assistance for TypeScript users, e.g. by automatically
-  inferring the type of `action` based on the action type (this also benefits
-  JavaScript users whose IDE's autocompletion is powered by TypeScript)
+* There is some required boilerplate, specifically the wrapping `switch
+ (action.type)` block and the `default: return state` case (the latter is easy
+ to forget when writing a new reducer).
 
-The following sections show the building blocks Preboiled provides for
-replicating the `switch` pattern before then putting them all together.
+* You have to remember the idiosyncrasies of JavaScript's `switch` statements,
+  such as the additional braces needed to define variables which should be
+  local to a case (e.g., `case 'multiply': { const factor = action.payload; …
+  }`).
 
-[redux-reducers]: https://redux.js.org/basics/reducers
-[redux-combine-reducers]: https://redux.js.org/api/combinereducers
+* In TypeScript, ensuring that `action` is typed correctly in every `switch`
+  branch requires a considerable amount of extra typing effort, often including
+  [union types of all types of actions in the app][redux-ts-actions].
 
-## Action Sub-Reducers
+Redux Preboiled has several helpers for constructing reducers which address
+these shortcomings. Here is how you might write the example reducer above with
+Preboiled:
 
-For handling specific types of actions, Redux Preboiled offers the `onAction`
-helper. It creates a reducer-like function that processes only actions of a
-particular type; on all other actions, it simply returns the state unchanged.
+```js
+import {
+  chainReducers,
+  onAction,
+  withInitialState
+} from 'redux-preboiled'
+
+const counterReducer = chainReducers(
+  withInitialState(0),
+  onAction('increment', state => state + 1),
+  onAction('decrement', state => state - 1),
+  onAction('multiply', (state, action) => state * action.payload)
+)
+```
+
+This guide details Preboiled's reducer helpers and how they relate, plus how
+they help you reduce typing effort if you use TypeScript.
+
+## Reducing Specific Actions
+
+Preboiled's [`onAction`](../api/onAction.md) helper generates reducer-like
+functions which update the state only in response to actions of a specific type.
 
 ```js
 import { onAction } from 'redux-preboiled'
-
-const multiplyReducer = onAction('multiply', (state, action) => {
-  return state * action.payload
-})
-
-onAction(2, { type: 'multiply', payload: 4 })
-// => 8
-
-onAction(8, { type: 'increment' })
-// => 8
-```
-
-Note that the functions returned by `onAction` don't provide any initial state
-and are thus not "proper" reducers (we call these kinds of functions
-_sub-reducers_ in Preboiled). However, they can be used as building blocks
-which allow you to replicate the `switch` reducer pattern using function
-composition. The example below illustrates how to do this manually; later in
-this guide we'll cover how this pattern can be streamlined using Preboiled's
-[reducer chaining](#chaining-reducers) helper.
-
-```js
-const onIncrement = onAction('increment', state => {
-  return state + 1
-})
 
 const onMultiply = onAction('multiply', (state, action) => {
   return state * action.payload
 })
 
-function counterReducer(state = 0, action) {
-  state = onIncrement(state, action)
-  state = onMultiply(state, action)
-  return state
-}
-
-counterReducer(0, { type: 'increment' })
-// => 1
-
-counterReducer(2, { type: 'multiply', payload: 4 })
+onMultiply(2, { type: 'multiply', payload: 4 })
 // => 8
+
+onMultiply(2, { type: 'increment' })
+// => 2
 ```
 
-### Combining with `createAction`
+Note that the functions returned by `onAction` are not "proper" reducers - they
+don't provide an initial state. For this reason, we prefer to call them
+**sub-reducers** as they are meant to be embedded into actual reducer functions.
+Later in this guide, we'll see how this can be done easily with the
+`withInitialState` and `chainReducers` helpers.
 
-If you generate your action creators using the
-[`createAction`](../api/createAction.md) helper (as described in the
-[Actions](./actions.md) guide), you can pass those directly to `onAction` in
+### Integration with `createAction`
+
+If you generate your action creators using
+[`createAction`](../api/createAction.md) (as described in the
+[Actions guide](./actions.md)), you can pass them directly to `onAction` in
 place of their corresponding action types.
 
 ```js
@@ -109,30 +98,40 @@ const onMultiply = onAction(multiply, (state, action) => {
 ```
 
 This removes a bit of noise as you don't need to write
-`onAction(increment.type, ...)`. If you use TypeScript, there is another
-benefit: based on the action creator's type, the TypeScript compiler will
-automatically infer the type of the `action` parameter. This gives you better
-autocompletion and helps you prevent mistakes, like in the following example:
+`onAction(multiply.type, ...)`.
+
+If you use TypeScript, there is another benefit: based on the action creator's
+type, the TypeScript compiler automatically infers the type of the `action`
+argument passed to the state update function. This helps you prevent mistakes,
+like in the following example:
 
 ```ts
 // TypeScript
 
-// I forgot to call .withPayload() here. Oops.
+// If I forget to call .withPayload() here...
 const multiply = createAction('multiply')
 
 const onMultiply = onAction(multiply, (state, action) => {
-  // TypeScript ERROR:
+  // ... the TypeScript compiler will complain here:
   // Property 'payload' does not exists on type 'Action<"multiply">'.
   return state * action.payload
 })
 ```
 
+You'll also get better autocompletion in IDE's and editors which understand
+TypeScript, such as Visual Studio Code or WebStorm.
+
 ## Providing Initial State
 
-As mentioned above, `onAction` returns only a _sub-reducer_ that doesn't
-provide an initial state. Using the
-[`withInitialState`](../api/withInitialState.md) helper, you can turn such a
-reducer-like function into a proper reducer with the specified initial state.
+Using the `withInitialState` helper, you can generate reducers which return a
+specific value as initial state.
+
+There are two ways to use this helper. The first is to pass an initial state
+value and a reducer-like state update function. The resulting reducer will
+forward all calls to that function unless called with an `undefined` state
+(i.e., during Redux store initialization), in which case it returns the given
+initial state value instead. One use case for this variant is to make a
+full reducer from a single `onAction` sub-reducer:
 
 ```js
 import { onAction, withInitialState } from 'redux-preboiled'
@@ -147,97 +146,100 @@ reducer(0, { type: 'increment' })
 // => 1
 ```
 
-You can also call `withInitialState` with a state value only. In this case,
-the resulting reducer will simply return the unchanged input state after
-initialization.
+Alternatively, you can specify _onlY_ an initial state when calling
+`withInitialState`. In this case, the reducer will simply return any
+non-`undefined` state unchanged.
 
 ```js
-import { onAction, withInitialState } from 'redux-preboiled'
-
-const reducer = withInitialState('Always bet on JS')
-
-reducer(undefined, { type: '@@INIT' })
-// => 'Always bet on JS'
-
-reducer('Always bet on JS', { type: 'Rust' })
-// => 'Always bet on JS'
-```
-
-This latter form is meant to be used in a _reducer chain_, as described in the
-following section.
-
-## Chaining Reducers
-
-Preboiled's [`chainReducers`](../api/chainReducers.md) helper complements
-[`combineReducers`][redux-combine-reducers] from Redux. Whereas the latter
-bundles reducers managing different state slices, `chainReducers` lets you
-compose a sequence of (sub-)reducers for the _same_ state slice by arranging
-them to a call "chain". More specifically, it creates a single reducer that
-calls each of the passed sub-reducers in order, forwarding the state returned
-by each sub-reducer to the next. The reducer finally returns the result from
-the last sub-reducer in the chain.
-
-Let's look at a silly but illustrative example:
-
-```js
-import { chainReducers } from 'redux-preboiled'
-
-const incrementing = (state, action) => state + action.payload
-const multiplying = (state, action) => state * action.payload
-
-const reducer = chainReducers(incrementing, multiplying)
-
-const action = { type: 'anything', payload: 2 }
-reducer(1, action)
-// => (1 + 2) * 2
-// == 4
-```
-
-As can be seen from the result, `reducer(1, action)` first calls
-`incrementing(1, action)`, as `incrementing` is at the beginning of the
-reducer chain; then it passes the result (2) together with `action` to
-`multiplying`, yielding 4; and finally, as `multiplying` comes last in the
-chain, returns that value to the caller.
-
-`chainReducers` goes well with `onAction` and `withInitialState`. Using these
-three, you can easily create reducers that handle multiple types of actions.
-
-```js
-import {
-  chainReducers,
-  createAction,
-  onAction,
-  withInitialState
-} from 'redux-preboiled'
-
-const increment = createAction('increment')
-const multiply = createAction('multiply').withPayload()
-
-const reducer = chainReducers(
-  withInitialState(0),
-  onAction(increment, state => state + 1),
-  onAction(multiply, (state, action) => state * action.payload)
-)
+const reducer = withInitialState(0)
 
 reducer(undefined, { type: '@@INIT' })
 // => 0
 
-reducer(0, increment())
-// => 1
-
-reducer(1, multiply(3))
-// => 3
+reducer(123, { type: '' })
+// => 123
 ```
 
-This pattern is equivalent to the classic `switch (action.type)` approach. But
-as described at the beginning of this guide, the Preboiled version requires
-less code, is a bit less error-prone, and offers better type inference to
-TypeScript users.
+This second version of `withInitialState` is useful for _reducer chains_, which
+we'll look at next.
 
-[redux-combine-reducers]: https://redux.js.org/api/combinereducers
+## Chaining Reducers
+
+Redux comes with the [`combineReducers`][redux-combine-reducers] function,
+which allows you to compose multiple reducers which each manage a different
+slice of the state. Preboiled complements this with
+[`chainReducers`](../api/chainReducers.md), which is about composing reducers
+for the _same_ slice of state.
+
+`chainReducers` turns a sequence of (sub-)reducers into a pipeline, or "chain",
+where the output state of one reducer becomes the input state for the next.
+Let's look at a silly, but illustrative example:
+
+```js
+import { chainReducers } from 'redux-preboiled'
+
+const uppercaseReducer = (state = '', action) => {
+  return state + action.payload.toLowerCase()
+}
+
+const lowercaseReducer = (state, action) => {
+  return state + action.payload.toUpperCase()
+}
+
+const reducer = chainReducers(
+  lowercaseReducer,
+  uppercaseReducer
+)
+
+reducer('', { type: '', payload: 'a' })
+// => 'Aa'
+
+reducer('A', { type: '', payload: 'b' })
+// => 'AaBb'
+```
+
+For every incoming action, the reducer above first forwards the call to
+`uppercaseReducer`, the first reducer in the chain. It then passes the resulting
+state to the second reducer (`lowercaseReducer`), whose return value finally
+becomes the state returned by the chained reducer.
+
+Note that the first reducer in the chain is responsible for providing the
+initial state for all others. It thus cannot be a "sub-reducer" as the one
+returned by `onAction`. A common pattern is to start the chain with
+`withInitialState(value)`. e.g.:
+
+```
+const reducer = chainReducers(
+  withInitialState(''),
+  lowercaseReducer,
+  uppercaseReducer
+)
+```
+
+## Replacing `switch`
+
+As shown in this guide's introduction, you can chain multiple `onAction`
+sub-reducers as an alternative to the `switch` reducer pattern.
+
+```js
+const counterReducer = chainReducers(
+  withInitialState(0),
+  onAction('increment', state => state + 1),
+  onAction('multiply', (state, action) => state * action.payload)
+)
+```
+
+This works because each sub-reducer only reacts to one specific type of action,
+and leaves the state unchanged for all others; incoming actions will thus pass
+through until they reach the matching sub-reducer, or leave the chain without a
+state change (the equivalent of `default: return state` in the `switch`
+pattern).
 
 ## Next Steps
 
-You have now seen how you can reduce boilerplate when defining reducers. In
-addition, Redux Preboiled also has helpers that assist you in testing them.
-See the [Testing](./testing.md) guide to find out more.
+In addition to defining actions and reducers, Redux Preboiled also helps you with
+testing Redux code. Move to the [Testing](./testing.md) guide to find out more.
+
+[redux-combine-reducers]: https://redux.js.org/api/combinereducers
+[redux-reducers]: https://redux.js.org/basics/reducers
+[redux-ts-actions]: https://redux.js.org/recipes/usage-with-typescript#type-checking-actions-action-creators
