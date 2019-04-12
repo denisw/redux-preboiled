@@ -24,7 +24,7 @@ function onAction<
   S = any,
   A extends Action = AnyAction
 >(
-  actionCreator: IntrospectableActionCreator<A>,
+  actionCreator: TypedActionCreator<A>,
   actionReducer: SubReducer<S, A>
 ): SubReducer<S>
 ```

@@ -1,5 +1,5 @@
 import { Action, AnyAction } from 'redux'
-import { SubReducer, IntrospectableActionCreator } from './types.js'
+import { SubReducer, TypedActionCreator } from './types.js'
 
 /**
  * Returns a sub-reducer for a specific action type. Actions of this
@@ -17,7 +17,7 @@ export default function onAction<
   A extends Action<T> = AnyAction
 >(type: T, actionReducer: SubReducer<S, A>): SubReducer<S>
 export default function onAction<S = any, A extends Action = AnyAction>(
-  actionCreator: IntrospectableActionCreator<A>,
+  actionCreator: TypedActionCreator<A>,
   actionReducer: SubReducer<S, A>
 ): SubReducer<S>
 export default function onAction<
@@ -25,7 +25,7 @@ export default function onAction<
   T = any,
   A extends Action<T> = AnyAction
 >(
-  actionTypeOrCreator: string | IntrospectableActionCreator<A>,
+  actionTypeOrCreator: string | TypedActionCreator<A>,
   actionReducer: SubReducer<S, A>
 ): SubReducer<S> {
   const actionType =
