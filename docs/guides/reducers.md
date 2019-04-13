@@ -165,11 +165,10 @@ we'll look at next.
 
 ## Chaining Reducers
 
-Redux comes with the [`combineReducers`][redux-combine-reducers] function,
-which allows you to compose multiple reducers which each manage a different
-slice of the state. Preboiled complements this with
-[`chainReducers`](../api/chainReducers.md), which is about composing reducers
-for the _same_ slice of state.
+Redux comes with the [`combineReducers`][redux-combine-reducers] function, which
+allows you to compose multiple reducers for different state slices.
+Preboiled complements this with [`chainReducers`](../api/chainReducers.md),
+which is about composing reducers for the _same_ state slice.
 
 `chainReducers` turns a sequence of (sub-)reducers into a pipeline, or "chain",
 where the output state of one reducer becomes the input state for the next.
@@ -179,16 +178,16 @@ Let's look at a silly, but illustrative example:
 import { chainReducers } from 'redux-preboiled'
 
 const uppercaseReducer = (state = '', action) => {
-  return state + action.payload.toLowerCase()
+  return state + action.payload.toUppercase()
 }
 
 const lowercaseReducer = (state, action) => {
-  return state + action.payload.toUpperCase()
+  return state + action.payload.toLowerCase()
 }
 
 const reducer = chainReducers(
-  lowercaseReducer,
-  uppercaseReducer
+  uppercaseReducer,
+  lowercaseReducer
 )
 
 reducer('', { type: '', payload: 'a' })
@@ -201,12 +200,12 @@ reducer('A', { type: '', payload: 'b' })
 For every incoming action, the reducer above first forwards the call to
 `uppercaseReducer`, the first reducer in the chain. It then passes the resulting
 state to the second reducer (`lowercaseReducer`), whose return value finally
-becomes the state returned by the chained reducer.
+becomes the state returned by the chained reducer itself.
 
-Note that the first reducer in the chain is responsible for providing the
-initial state for all others. It thus cannot be a "sub-reducer" as the one
-returned by `onAction`. A common pattern is to start the chain with
-`withInitialState(value)`. e.g.:
+Note that for the chain to be a proper reducer, at least one of its functions
+(usually the first one) must return an initial state if called with an
+`undefined` state. A common pattern is to start the chain with a
+`withInitialState` reducer, e.g.:
 
 ```
 const reducer = chainReducers(
@@ -219,7 +218,7 @@ const reducer = chainReducers(
 ## Replacing `switch`
 
 As shown in this guide's introduction, you can chain multiple `onAction`
-sub-reducers as an alternative to the `switch` reducer pattern.
+sub-reducers as replacment for the `switch` reducer pattern.
 
 ```js
 const counterReducer = chainReducers(
@@ -231,14 +230,14 @@ const counterReducer = chainReducers(
 
 This works because each sub-reducer only reacts to one specific type of action,
 and leaves the state unchanged for all others; incoming actions will thus pass
-through until they reach the matching sub-reducer, or leave the chain without a
-state change (the equivalent of `default: return state` in the `switch`
-pattern).
+through the chain until they reach the matching sub-reducer, or leave the chain
+without a state change (the equivalent of `default: return state` in the
+`switch` pattern).
 
 ## Next Steps
 
-In addition to defining actions and reducers, Redux Preboiled also helps you with
-testing Redux code. Move to the [Testing](./testing.md) guide to find out more.
+In addition to defining actions and reducers, Redux Preboiled also helps you
+with testing your Redux code. See the [Testing guide](./testing.md).
 
 [redux-combine-reducers]: https://redux.js.org/api/combinereducers
 [redux-reducers]: https://redux.js.org/basics/reducers
