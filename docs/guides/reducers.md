@@ -224,7 +224,7 @@ sub-reducers as replacment for the `switch` reducer pattern.
 const counterReducer = chainReducers(
   withInitialState(0),
   onAction('increment', state => state + 1),
-  onAction('multiply', (state, action) => state * action.payload)
+  onAction('multiply', (state, { payload }) => state * payload)
 )
 ```
 
