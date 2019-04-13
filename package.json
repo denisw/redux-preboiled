@@ -1,7 +1,7 @@
 {
   "name": "redux-preboiled",
   "description": "Composable, typing-friendly Redux helpers",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "license": "MIT",
   "scripts": {
     "build": "pack build",
@@ -13,42 +13,43 @@
     "redux": "^4.0.1"
   },
   "devDependencies": {
-    "@babel/plugin-transform-modules-commonjs": "^7.2.0",
-    "@babel/preset-env": "^7.3.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
     "@babel/preset-typescript": "^7.3.3",
-    "@pika/pack": "^0.3.3",
-    "@pika/plugin-build-node": "^0.3.12",
-    "@pika/plugin-build-web": "^0.3.12",
-    "@pika/plugin-standard-pkg": "^0.3.12",
-    "@pika/plugin-ts-standard-pkg": "^0.3.12",
-    "@types/jest": "^24.0.9",
-    "@typescript-eslint/eslint-plugin": "^1.4.2",
-    "@typescript-eslint/parser": "^1.4.2",
-    "babel-jest": "^24.1.0",
-    "eslint": "^5.15.0",
-    "jest": "^24.1.0",
-    "prettier": "^1.16.4",
+    "@pika/pack": "^0.3.7",
+    "@pika/plugin-build-node": "^0.3.15",
+    "@pika/plugin-build-types": "^0.3.15",
+    "@pika/plugin-build-web": "^0.3.15",
+    "@pika/plugin-standard-pkg": "^0.3.15",
+    "@types/jest": "^24.0.11",
+    "@typescript-eslint/eslint-plugin": "^1.6.0",
+    "@typescript-eslint/parser": "^1.6.0",
+    "babel-jest": "^24.7.1",
+    "eslint": "^5.16.0",
+    "jest": "^24.7.1",
+    "prettier": "^1.17.0",
     "redux": "^4.0.1",
-    "typescript": "^3.3.3333"
+    "typescript": "^3.4.3"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testMatch": [
+      "<rootDir>/test/**/*.test.ts"
+    ]
   },
   "@pika/pack": {
     "pipeline": [
       [
-        "@pika/plugin-ts-standard-pkg",
-        {
-          "include": [
-            "src"
-          ]
-        }
+        "@pika/plugin-standard-pkg"
       ],
       [
         "@pika/plugin-build-node"
       ],
       [
         "@pika/plugin-build-web"
+      ],
+      [
+        "@pika/plugin-build-types"
       ]
     ]
   },

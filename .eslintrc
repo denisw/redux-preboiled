@@ -11,5 +11,13 @@
   },
   "env": {
     "jest": true
-  }
+  },
+  "overrides": [
+    {
+      "files": ["babel.config.js"],
+      "env": {
+        "commonjs": true
+      }
+    }
+  ]
 }
