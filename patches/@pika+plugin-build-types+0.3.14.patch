@@ -1,0 +1,28 @@
+diff --git a/node_modules/@pika/plugin-build-types/dist-node/index.js b/node_modules/@pika/plugin-build-types/dist-node/index.js
+index 9f81c56..234c663 100644
+--- a/node_modules/@pika/plugin-build-types/dist-node/index.js
++++ b/node_modules/@pika/plugin-build-types/dist-node/index.js
+@@ -102,7 +102,7 @@ function _build() {
+       const tsConfigPath = getTsConfigPath(options, cwd);
+ 
+       if (fs.existsSync(tscBin) && fs.existsSync(tsConfigPath)) {
+-        yield execa(tscBin, ["-d", "--emitDeclarationOnly", "--declarationMap", "false", "--declarationDir", "--project", tsConfigPath, path.join(out, "dist-types/")], {
++        yield execa(tscBin, ["-d", "--emitDeclarationOnly", "--declarationMap", "false", "--project", tsConfigPath, "--declarationDir", path.join(out, "dist-types/")], {
+           cwd
+         });
+         return;
+diff --git a/node_modules/@pika/plugin-build-types/dist-src/index.js b/node_modules/@pika/plugin-build-types/dist-src/index.js
+index f84ba85..c95d26c 100644
+--- a/node_modules/@pika/plugin-build-types/dist-src/index.js
++++ b/node_modules/@pika/plugin-build-types/dist-src/index.js
+@@ -38,9 +38,9 @@ export async function build({ cwd, out, options, reporter }) {
+                 "--emitDeclarationOnly",
+                 "--declarationMap",
+                 "false",
+-                "--declarationDir",
+                 "--project",
+                 tsConfigPath,
++                "--declarationDir",
+                 path.join(out, "dist-types/")
+             ], { cwd });
+             return;

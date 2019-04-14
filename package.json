@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "postinstall": "patch-package",
     "build": "pack build",
     "lint": "eslint 'src/**/*.ts'",
     "prepublishOnly": "npm run lint && npm run type-check && npm test",
@@ -29,6 +30,7 @@
     "babel-jest": "^24.7.1",
     "eslint": "^5.16.0",
     "jest": "^24.7.1",
+    "patch-package": "^6.1.2",
     "prettier": "^1.17.0",
     "redux": "^4.0.1",
     "typescript": "^3.4.3"
