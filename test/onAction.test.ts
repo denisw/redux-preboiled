@@ -1,5 +1,5 @@
-import onAction from '../src/onAction'
 import createAction from '../src/createAction'
+import onAction from '../src/onAction'
 import { PayloadAction } from '../src/types'
 
 const increment = createAction('increment')

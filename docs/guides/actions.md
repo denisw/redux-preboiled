@@ -26,7 +26,7 @@ const multiply = amount => ({
 ```
 
 This is a straight-forward pattern [with several
-upsides][redux-actions-boilerplate], but it's also a quite verbose one. 
+upsides][redux-actions-boilerplate], but it's also a quite verbose one.
 Preboiled's [`createAction`](./createAction.md) helper, described in this
 guide, helps you reduce the noise while keeping the benefits. Here is the
 equivalent code using `createAction`:
@@ -112,8 +112,8 @@ as payload:
 const logIn = createAction('auth/logIn').withPayload()
 
 login({ username: 'alice', password: 'ecila' })
-// => 
-// { 
+// =>
+// {
 //   type: 'auth/logIn',
 //   payload: { username: 'alice', password: 'ecila' }
 // }
@@ -123,7 +123,7 @@ login({ username: 'alice', password: 'ecila' })
 
 Defining actions is one thing, but you also need the reducers to handle them.
 Redux Preboiled can help you with that too, as you'll see in the [Reducers
-guide](./reducers.md). 
+guide](./reducers.md).
 
 [redux-actions]: https://redux.js.org/basics/actions
-[redux-actions-boilerplate]: https://redux.js.org/recipes/reducing-boilerplate#actions 
+[redux-actions-boilerplate]: https://redux.js.org/recipes/reducing-boilerplate#actions

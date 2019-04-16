@@ -1,4 +1,3 @@
-
 # Redux Preboiled
 
 ![npm](https://img.shields.io/npm/dw/redux-preboiled.svg)
@@ -14,17 +13,20 @@ creators, and tests.
 
 - **Served _à la carte_.** Each of Preboiled's helpers can be used stand-alone.
   Just pick and use the ones you want and ignore the rest. If your build setup
-  does [tree shaking][tree-shaking], the unused helpers won't even be added 
+  does [tree shaking][tree-shaking], the unused helpers won't even be added
   to your application's build output.
 
 - **Minimal magic.** Preboiled avoids clever "magic" tricks which minimize
   boilerplate at the expense of understandability. Instead, it favors simple,
   composable functions with easy-to-understand semantics and implementations.
 
-- **TypeScript-friendly.** Redux Preboiled is written in 
-  [TypeScript][typescript]. Its helpers are designed to be easy to type and 
-  amenable to automatic type inference, making it easy to write type-safe 
+- **TypeScript-friendly.** Redux Preboiled is written in
+  [TypeScript][typescript]. Its helpers are designed to be easy to type and
+  amenable to automatic type inference, making it easy to write type-safe
   Redux code.
+
+For more background on the motivation behind this library, see the
+[introductory blog post][blog].
 
 ## Installation
 
@@ -39,7 +41,7 @@ yarn add redux-preboiled
 ## A First Taste
 
 The following snippet uses a bunch of Redux Preboiled's helpers to define a
-simple Redux counter module with support for `increment` and `multiply` 
+simple Redux counter module with support for `increment` and `multiply`
 actions. It is about half the size of the equivalent vanilla Redux code.
 
 ```js
@@ -71,17 +73,17 @@ store.getState()
 // => 4
 ```
 
-* `createAction` generates various types of action creator functions with
+- `createAction` generates various types of action creator functions with
   minimal ceremony. The specified action type value is made available as an
   action creator property (`increment.type` and `mutliply.type` in this
   example), making separate action type constants unnecessary. See the
   [Actions](./guides/actions.md) guide.
 
-* The `onAction`, `withInitialState` and `chainReducers` helpers can be 
-  combined as a less noisy alternative to the classic `switch` reducer 
-  pattern. In TypeScript, the type of the sub-reducers' `action` parameters 
+- The `onAction`, `withInitialState` and `chainReducers` helpers can be
+  combined as a less noisy alternative to the classic `switch` reducer
+  pattern. In TypeScript, the type of the sub-reducers' `action` parameters
   are automatically inferred from the action creators passed to `onAction`,
-  improving type safety and editor auto-completion. See the 
+  improving type safety and editor auto-completion. See the
   [Reducers](./guides/reducers.md) guide.
 
 ## Documentation
@@ -90,6 +92,7 @@ See the [guides][docs-guides] for a tour through Preboiled, or jump
 right to the [API docs][docs-api] for detailed descriptions of all helpers
 Redux Preboiled has to offer.
 
+[blog]: https://www.denisw.de/2019/04/08/redux-preboiled.html
 [docs]: https://redux-preboiled.gitbook.io/docs/
 [docs-actions]: https://redux-preboiled.gitbook.io/docs/guides/actions
 [docs-api]: https://redux-preboiled.gitbook.io/docs/api/api
