@@ -18,3 +18,7 @@
 * [onAction](./api/onAction.md)
 * [reduceActions](./api/reduceActions.md)
 * [withInitialState](./api/withInitialState.md)
+
+## Misc
+
+* [License](../LICENSE.md)
