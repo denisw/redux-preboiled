@@ -1,6 +1,6 @@
 # Summary
 
-* [Introduction](./introduction.md)
+* [Redux Preboiled](./introduction.md)
 
 ## Guides
 
@@ -11,7 +11,7 @@
 
 ## API
 
-* [Overview](./api/README.md)
+* [API Overview](./api/README.md)
 * [chainReducers](./api/chainReducers.md)
 * [createAction](./api/createAction.md)
 * [getInitialState](./api/getInitialState.md)
