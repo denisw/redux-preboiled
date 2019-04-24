@@ -97,11 +97,11 @@ Redux Preboiled is relased under the MIT license. See [LICENSE.md][license]
 for details.
 
 [blog]: https://www.denisw.de/2019/04/08/redux-preboiled.html
-[docs]: https://redux-preboiled.gitbook.io/docs/
-[docs-actions]: https://redux-preboiled.gitbook.io/docs/guides/actions
-[docs-api]: https://redux-preboiled.gitbook.io/docs/api/api
-[docs-guides]: https://redux-preboiled.gitbook.io/docs/guides/getting-started
-[docs-reducers]: https://redux-preboiled.gitbook.io/docs/guides/reducers
+[docs]: https://redux-preboiled.js.org/
+[docs-actions]: https://redux-preboiled.js.org/guides/actions
+[docs-api]: https://redux-preboiled.js.org/api/api
+[docs-guides]: https://redux-preboiled.js.org/guides/getting-started
+[docs-reducers]: https://redux-preboiled.js.org/guides/reducers
 [license]: https://github.com/denisw/redux-preboiled/blob/master/LICENSE.md
 [redux]: https://redux.js.org/
 [tree-shaking]: https://developers.google.com/web/fundamentals/performance/optimizing-javascript/tree-shaking/
