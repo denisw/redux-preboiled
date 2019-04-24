@@ -1,7 +1,7 @@
 # `reduceActions`
 
-Calculates the state after dispatching an action sequence to a specific
-reducer (test helper).
+_Testing helper._ Calculates the state after dispatching an sequence of
+actions to a specific reducer, starting from the initial state.
 
 ```js
 // JavaScript
@@ -20,18 +20,17 @@ function reduceActions<S, A extends Action>(
 
 ## Details
 
-`reduceActions` requests an initial state from the given reducer (using
-[`getInitialState`](./getInitialState.md)) and then calls the reducer each of
-the passed actions in the specified order, just as if these actions had been
-dispatched to the reducer's Redux store. The state resulting from the last of
-these reducer calls is returned.
+`reduceActions` calls `reducer` with each of the passed `actions` -  as if
+these had been dispatched in the specified order - and returns the resulting
+state. For the first reducer call, the reducer's initial state (as determined
+by [`getInitialState`](./getInitialState.md)) is used; each following call
+receives the state returned by the previous one.
 
 If called without any actions, `reduceActions` simply returns the reducer's
-initial state (just like [`getInitialState`](./getInitialState.md)).
+initial state - that is, `reduceActions(reducer)` is equivalent to
+`getInitialState(reducer)`.
 
-This helper is great for reducer tests. For instance, you can use it to test
-that a loading flag is unset if an success action is dispatched after a
-"request pending" action.
+This helper is meant for use in reducer tests.
 
 ## Examples
 
@@ -70,34 +69,24 @@ Usage in a [Jest][jest] test:
 
 ```js
 import { reduceActions } from 'redux-preboiled'
+import counterReducer, {
+  increment,
+  multiply
+} from './counter.redux'
 
-const initialState = {
-  loading: false
-}
-
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'fetchRecipe':
-      return { loading: true }
-    case 'fetchRecipeSuccess':
-      return { loading: false }
-    default:
-      return state
-  }
-}
-
-test('fetchRecipe sets loading flag', () => {
-  const state = reduceActions(reducer, { type: 'fetchRecipe' })
-  expect(state.loading).toEqual(true)
+test('increment', () => {
+  const state = reduceActions(counterReducer, increment())
+  expect(state).toEqual(1)
 })
 
-test('fetchRecipeSuccess unsets loading flag', () => {
+test('increment and multiply', () => {
   const state = reduceActions(
-    reducer,
-    { type: 'fetchRecipe' },
-    { type: 'fetchRecipeSuccess' }
+    counterReducer,
+    increment(),
+    increment(),
+    multiply(4)
   )
-  expect(state.loading).toEqual(false)
+  expect(state).toEqual(8)
 })
 ```
 

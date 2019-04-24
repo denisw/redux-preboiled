@@ -1,4 +1,8 @@
-import { getInitialState, reduceActions } from 'redux-preboiled'
+import {
+  getInitialState,
+  reduceActions,
+  reduceActionsFrom
+} from 'redux-preboiled'
 import reducer, { increment, decrement, multiply } from './counter.redux'
 
 test('initial state is 0', () => {
@@ -16,11 +20,11 @@ test('multiple increments', () => {
 })
 
 test('decrement', () => {
-  const state = reduceActions(reducer, increment(), decrement())
-  expect(state).toBe(0)
+  const state = reduceActionsFrom(3, reducer, decrement())
+  expect(state).toBe(2)
 })
 
 test('multiply', () => {
-  const state = reduceActions(reducer, increment(), increment(), multiply(2))
-  expect(state).toBe(4)
+  const state = reduceActionsFrom(2, reducer, multiply(4))
+  expect(state).toBe(8)
 })

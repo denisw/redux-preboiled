@@ -88,15 +88,15 @@ import {
 
 const increment = createAction('increment')
 
-const reducer = chainReducers(
+const counterReducer = chainReducers(
   withInitialState(0),
   onAction(increment, state => state + 1)
 )
 
-reduceActions(reducer, increment())
+reduceActions(counterReducer, increment())
 // => 1
 
-reduceActions(reducer, increment(), increment())
+reduceActions(counterReducer, increment(), increment())
 // => 2
 ```
 
@@ -119,6 +119,17 @@ describe('on fetchDone', () => {
     expect(state.isFetching).toBe(false)
   })
 })
+```
+
+If you want to start the reduction from a specific starting state, you can use
+the [`reduceActionsFrom`](../api/reduceActionsFrom.md) helper instead.
+
+```js
+reduceActionsFrom(0, counterReducer, increment())
+// => 1
+
+reduceActionsFrom(3, counterReducer, increment(), increment())
+// => 5
 ```
 
 ## Next Steps

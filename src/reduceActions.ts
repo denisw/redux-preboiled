@@ -15,5 +15,6 @@ export default function reduceActions<S, A extends Action>(
   ...actions: A[]
 ): S {
   const initialState = getInitialState(reducer)
-  return actions.reduce(reducer, initialState) || initialState
+  return actions.reduce(reducer, initialState)
 }
+
