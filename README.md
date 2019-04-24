@@ -88,9 +88,13 @@ store.getState()
 
 ## Documentation
 
-See the [guides][docs-guides] for a tour through Preboiled, or jump
-right to the [API docs][docs-api] for detailed descriptions of all helpers
-Redux Preboiled has to offer.
+- [Guides][docs-guides]
+- [API documentation][docs-api]
+
+## License
+
+Redux Preboiled is relased under the MIT license. See [LICENSE.md][license]
+for details.
 
 [blog]: https://www.denisw.de/2019/04/08/redux-preboiled.html
 [docs]: https://redux-preboiled.gitbook.io/docs/
@@ -98,6 +102,7 @@ Redux Preboiled has to offer.
 [docs-api]: https://redux-preboiled.gitbook.io/docs/api/api
 [docs-guides]: https://redux-preboiled.gitbook.io/docs/guides/getting-started
 [docs-reducers]: https://redux-preboiled.gitbook.io/docs/guides/reducers
+[license]: https://github.com/denisw/redux-preboiled/blob/master/LICENSE.md
 [redux]: https://redux.js.org/
 [tree-shaking]: https://developers.google.com/web/fundamentals/performance/optimizing-javascript/tree-shaking/
 [typescript]: https://www.typescriptlang.org/
