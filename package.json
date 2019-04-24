@@ -4,7 +4,6 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "postinstall": "patch-package",
     "build": "pack build",
     "lint": "eslint 'src/**/*.ts'",
     "prepublishOnly": "npm run lint && npm run type-check && npm test",
@@ -16,24 +15,24 @@
     "redux": "^4.0.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.3",
     "@babel/plugin-transform-modules-commonjs": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-typescript": "^7.3.3",
     "@pika/pack": "^0.3.7",
     "@pika/plugin-build-node": "^0.3.15",
-    "@pika/plugin-build-types": "^0.3.15",
+    "@pika/plugin-build-types": "^0.3.16",
     "@pika/plugin-build-web": "^0.3.15",
     "@pika/plugin-standard-pkg": "^0.3.15",
     "@types/jest": "^24.0.11",
-    "@typescript-eslint/eslint-plugin": "^1.6.0",
-    "@typescript-eslint/parser": "^1.6.0",
+    "@typescript-eslint/eslint-plugin": "^1.7.0",
+    "@typescript-eslint/parser": "^1.7.0",
     "babel-jest": "^24.7.1",
     "eslint": "^5.16.0",
     "jest": "^24.7.1",
-    "patch-package": "^6.1.2",
     "prettier": "^1.17.0",
     "redux": "^4.0.1",
-    "typescript": "^3.4.3"
+    "typescript": "^3.4.5"
   },
   "jest": {
     "testEnvironment": "node",
