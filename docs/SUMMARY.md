@@ -21,4 +21,5 @@
 
 ## Misc
 
+* [Changelog](../CHANGELOG.md)
 * [License](../LICENSE.md)
