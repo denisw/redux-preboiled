@@ -7,6 +7,6 @@ App](https://github.com/facebook/create-react-app).
 You can try it out by running the following in the example's directory:
 
 ```
-npm install
-npm start
+yarn install
+yarn start
 ```
