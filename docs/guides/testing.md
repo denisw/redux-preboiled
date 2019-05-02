@@ -137,8 +137,10 @@ reduceActionsFrom(3, counterReducer, increment(), increment())
 The current set of testing helpers is still very small. If there are any other
 helpers you'd like to see, feel free to [file an issue][new-issue].
 
-This guide concludes our tour through Redux Preboiled. For reference
-documentation on all helpers, see the [API section](../api/README.md).
+This guide concludes our tour through Redux Preboiled. For more examples,
+looking at the repository's [examples] directory. Reference documentation
+on all helpers can be found in the [API section](../api/README.md).
 
+[examples]: https://github.com/denisw/redux-preboiled/tree/master/examples
 [jest]: https://jestjs.io/
 [new-issue]: https://github.com/denisw/redux-preboiled/issues/new

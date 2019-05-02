@@ -89,6 +89,7 @@ store.getState()
 ## Documentation
 
 - [Guides][docs-guides]
+- [Examples][examples]
 - [API documentation][docs-api]
 
 ## License
@@ -102,6 +103,7 @@ for details.
 [docs-api]: https://redux-preboiled.js.org/api/api
 [docs-guides]: https://redux-preboiled.js.org/guides/getting-started
 [docs-reducers]: https://redux-preboiled.js.org/guides/reducers
+[examples]: https://github.com/denisw/redux-preboiled/tree/master/examples
 [license]: https://github.com/denisw/redux-preboiled/blob/master/LICENSE.md
 [redux]: https://redux.js.org/
 [tree-shaking]: https://developers.google.com/web/fundamentals/performance/optimizing-javascript/tree-shaking/
