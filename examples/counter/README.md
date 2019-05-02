@@ -1,4 +1,4 @@
-# Redux Preboiled Example: Counter
+# Preboiled Counter Example
 
 A simple React app using Redux Preboiled to implement a counter. This project
 was bootstrapped with [Create React
