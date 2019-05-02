@@ -1,5 +1,5 @@
 import { Action, AnyAction, Reducer } from 'redux'
-import { SubReducer } from './types.js'
+import { SubReducer } from './types'
 
 /**
  * Returns a reducer that calls the passed (sub-)reducers in sequence.

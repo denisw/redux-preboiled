@@ -1,4 +1,4 @@
-import { SimpleActionCreator, PayloadActionCreator } from './types.js'
+import { SimpleActionCreator, PayloadActionCreator } from './types'
 
 /**
  * Returns an action creator that generates actions of the passed type.

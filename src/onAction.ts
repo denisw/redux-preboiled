@@ -1,5 +1,5 @@
 import { Action, AnyAction } from 'redux'
-import { SubReducer, TypedActionCreator } from './types.js'
+import { SubReducer, TypedActionCreator } from './types'
 
 /**
  * Returns a sub-reducer for a specific action type. Actions of this

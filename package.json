@@ -3,13 +3,19 @@
   "description": "Composable, typing-friendly Redux helpers",
   "version": "0.2.0",
   "license": "MIT",
+  "main": "umd/index.js",
+  "module": "esm/index.js",
+  "esnext": "esnext/index.js",
+  "types": "types/index.d.ts",
   "scripts": {
-    "build": "pack build",
+    "prepare": "npm run build && npm run types",
+    "build": "rollup -c",
     "lint": "eslint 'src/**/*.ts'",
     "prepublishOnly": "npm run lint && npm run type-check && npm test",
     "publish": "pack publish",
     "test": "jest",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "types": "tsc --declaration --emitDeclarationOnly --declarationDir types"
   },
   "peerDependencies": {
     "redux": "^4.0.1"
@@ -19,11 +25,6 @@
     "@babel/plugin-transform-modules-commonjs": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-typescript": "^7.3.3",
-    "@pika/pack": "^0.3.7",
-    "@pika/plugin-build-node": "^0.3.15",
-    "@pika/plugin-build-types": "^0.3.16",
-    "@pika/plugin-build-web": "^0.3.15",
-    "@pika/plugin-standard-pkg": "^0.3.15",
     "@types/jest": "^24.0.11",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
@@ -32,29 +33,29 @@
     "jest": "^24.7.1",
     "prettier": "^1.17.0",
     "redux": "^4.0.1",
+    "rollup": "^1.10.1",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-node-resolve": "^4.2.3",
+    "rollup-plugin-terser": "^4.0.4",
     "typescript": "^3.4.5"
   },
+  "files": [
+    "esm",
+    "esnext",
+    "src",
+    "umd"
+  ],
   "jest": {
     "testEnvironment": "node",
     "testMatch": [
       "<rootDir>/test/**/*.test.ts"
     ]
   },
-  "@pika/pack": {
-    "pipeline": [
-      [
-        "@pika/plugin-standard-pkg"
-      ],
-      [
-        "@pika/plugin-build-node"
-      ],
-      [
-        "@pika/plugin-build-web"
-      ],
-      [
-        "@pika/plugin-build-types"
-      ]
-    ]
-  },
+  "browserslist": [
+    "> 0.2%",
+    "not dead",
+    "not ie < 11",
+    "not op_mini all"
+  ],
   "sideEffects": false
 }

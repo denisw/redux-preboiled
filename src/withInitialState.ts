@@ -1,5 +1,5 @@
 import { Action, Reducer } from 'redux'
-import { SubReducer } from './types.js'
+import { SubReducer } from './types'
 
 /**
  * Returns a reducer that returns the passed initial state when called

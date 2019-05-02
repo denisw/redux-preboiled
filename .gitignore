@@ -2,8 +2,11 @@
 node_modules
 npm-debug.log*
 
-# @pika/pack
-pkg
+# Build output
+esm
+esnext
+types
+umd
 
 # Jest
 coverage/

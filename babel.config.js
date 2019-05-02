@@ -1,5 +1,5 @@
 module.exports = {
-  presets: ['@babel/preset-typescript'],
+  presets: ['@babel/preset-env', '@babel/preset-typescript'],
   env: {
     test: {
       plugins: ['@babel/plugin-transform-modules-commonjs']
