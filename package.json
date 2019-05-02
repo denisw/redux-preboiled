@@ -47,6 +47,7 @@
     "esm",
     "esnext",
     "src",
+    "types",
     "umd"
   ],
   "jest": {
