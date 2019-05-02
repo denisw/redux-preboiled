@@ -8184,10 +8184,10 @@ recursive-readdir@2.2.2:
   dependencies:
     minimatch "3.0.4"
 
-redux-preboiled@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/redux-preboiled/-/redux-preboiled-0.2.0.tgz#b96f3b4114f4afd6cc4ce3cbcc3b9eba6b4f8b84"
-  integrity sha512-OEv6qSfgmNLPbHFDJ8aZ8GK5+bjChHlZLz8r0GR7Kg7gkPZlNaPEC7nzVizBKMkId3K7Iax1FootcpRBRGYpng==
+redux-preboiled@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/redux-preboiled/-/redux-preboiled-0.3.0.tgz#5ab44bb1811acca5d2480854cdb2dbad9b20b8a1"
+  integrity sha512-vpLru/rrwleVoLsi6XqVzSKAkBHLMQkA7FN/7bV/kUOYOlAHKbQ4uayclvaC698l+pr7Wl4VLMOv5H65LevTIQ==
 
 redux@^4.0.1:
   version "4.0.1"

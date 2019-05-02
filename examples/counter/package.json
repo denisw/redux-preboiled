@@ -8,7 +8,7 @@
     "react-redux": "^7.0.2",
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
-    "redux-preboiled": "^0.2.0"
+    "redux-preboiled": "^0.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
