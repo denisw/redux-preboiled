@@ -1,8 +1,13 @@
 {
   "name": "redux-preboiled",
   "description": "Composable, typing-friendly Redux helpers",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "MIT",
+  "homepage": "https://redux-preboiled.js.org",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:denisw/redux-preboiled.git"
+  },
   "main": "umd/index.js",
   "module": "esm/index.js",
   "esnext": "esnext/index.js",
