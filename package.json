@@ -17,7 +17,6 @@
     "build": "rollup -c",
     "lint": "eslint 'src/**/*.ts'",
     "prepublishOnly": "npm run lint && npm run type-check && npm test",
-    "publish": "pack publish",
     "test": "jest",
     "type-check": "tsc --noEmit",
     "types": "tsc --declaration --emitDeclarationOnly --declarationDir types"
