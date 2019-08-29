@@ -108,7 +108,7 @@ const multiply =
 If you need to attach more than one value to an action, you can use an object
 as payload:
 
-```
+```js
 const logIn = createAction('auth/logIn').withPayload()
 
 login({ username: 'alice', password: 'ecila' })
