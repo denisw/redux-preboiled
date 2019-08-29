@@ -1,7 +1,7 @@
 # Reducers
 
 Redux [reducers][redux-reducers] are usually written using `switch` statements,
-which each case handling a specific action type.
+with each case handling a specific action type.
 
 ```js
 function counterReducer(state = 0, action) {
@@ -146,7 +146,7 @@ reducer(0, { type: 'increment' })
 // => 1
 ```
 
-Alternatively, you can specify _onlY_ an initial state when calling
+Alternatively, you can specify _only_ an initial state when calling
 `withInitialState`. In this case, the reducer will simply return any
 non-`undefined` state unchanged.
 
@@ -207,7 +207,7 @@ Note that for the chain to be a proper reducer, at least one of its functions
 `undefined` state. A common pattern is to start the chain with a
 `withInitialState` reducer, e.g.:
 
-```
+```js
 const reducer = chainReducers(
   withInitialState(''),
   lowercaseReducer,
@@ -218,7 +218,7 @@ const reducer = chainReducers(
 ## Replacing `switch`
 
 As shown in this guide's introduction, you can chain multiple `onAction`
-sub-reducers as replacment for the `switch` reducer pattern.
+sub-reducers as a replacement for the `switch` reducer pattern.
 
 ```js
 const counterReducer = chainReducers(
