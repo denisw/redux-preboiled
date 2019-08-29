@@ -65,7 +65,7 @@ you don't need to define a separate action type constant.
 
 ```js
 increment.type
-// => 'increment'
+// => 'counter/increment'
 ```
 
 The `type` property also enables other helpers to accept a `createAction`
