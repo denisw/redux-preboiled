@@ -65,7 +65,7 @@ describe('on fetchStart', () => {
 describe('on fetchDone', () => {
   test('loading flag is unset', () => {
     const state1 = reducer(initialState, fetchStart())
-    const state2 = reducer(state2, fetchDone('data'))
+    const state2 = reducer(state1, fetchDone('data'))
     expect(state2.isFetching).toBe(false)
   })
 })
