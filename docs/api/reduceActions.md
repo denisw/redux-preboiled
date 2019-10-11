@@ -12,9 +12,9 @@ function reduceActions(reducer, ...actions)
 ```ts
 // TypeScript
 
-function reduceActions<S, A extends Action>(
+function reduceActions<S, A extends Action, AS extends A[]>(
   reducer: Reducer<S, A>,
-  ...actions: A[]
+  ...actions: AS
 ): S
 ```
 

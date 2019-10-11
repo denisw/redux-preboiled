@@ -12,10 +12,10 @@ function reduceActionsFrom(state, reducer, ...actions)
 ```ts
 // TypeScript
 
-function reduceActionsFrom<S, A extends Action>(
+function reduceActionsFrom<S, A extends Action, AS extends A[]>(
   state: S,
   reducer: Reducer<S, A>,
-  ...actions: A[]
+  ...actions: AS
 ): S
 ```
 

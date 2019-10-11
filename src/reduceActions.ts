@@ -10,11 +10,10 @@ import getInitialState from './getInitialState'
  * @param reducer - The reducer to process the actions with.
  * @param actions - The actions to process.
  */
-export default function reduceActions<S, A extends Action>(
+export default function reduceActions<S, A extends Action, AS extends A[]>(
   reducer: Reducer<S, A>,
-  ...actions: A[]
+  ...actions: AS
 ): S {
   const initialState = getInitialState(reducer)
   return actions.reduce(reducer, initialState)
 }
-

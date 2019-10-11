@@ -10,10 +10,10 @@ import { Action, Reducer } from 'redux'
  * @param reducer - The reducer to process the actions with.
  * @param actions - The actions to process.
  */
-export default function reduceActionsFrom<S, A extends Action>(
+export default function reduceActionsFrom<S, A extends Action, AS extends A[]>(
   state: S,
   reducer: Reducer<S, A>,
-  ...actions: A[]
+  ...actions: AS
 ): S {
   return actions.reduce(reducer, state)
 }
