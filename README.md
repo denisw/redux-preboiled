@@ -1,6 +1,6 @@
 # Redux Preboiled
 
-![npm](https://img.shields.io/npm/dw/redux-preboiled.svg)
+[![npm](https://img.shields.io/npm/dw/redux-preboiled.svg)](https://www.npmjs.com/package/redux-preboiled)
 [![Build Status](https://travis-ci.org/denisw/redux-preboiled.svg?branch=master)](https://travis-ci.org/denisw/redux-preboiled)
 
 ![](./logo/logo.png)
