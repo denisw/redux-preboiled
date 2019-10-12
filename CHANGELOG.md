@@ -12,17 +12,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **TypeScript:** Fix a type error with TypeScript v3.6 when passing actions
   of different types to `reduceActions` and `reduceActionsFrom`.
 
+- Documentation fixes by [@k-nut](https://github.com/k-nut) and
+  [@dannyfritz](https://github.com/dannyfritz).
+
 ### Internal
 
 - Redux Preboiled now has a suite of TypeScript type definition tests powered
   by [tsd](https://github.com/SamVerschueren/tsd). This should help ensure
   that the typings don't break on new TypeScript releases.
 
+- Upgrade TypeScript to v3.6.4.
+
+- Upgrade Rollup to v1.23.1.
+
+- Upgrade Babel to v7.6.4.
+
+## [0.3.1] - 2019-05-02
+
 ### Fixed
 
 - Ship typings (they were accidentally ommitted from v0.3.0).
 
-## [0.3.0]
+## [0.3.0] - 2019-05-02
 
 ### Changed
 
@@ -33,7 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - All builds (except the `esnext` one) are now transpiled to ES5, which makes
   them work in older browsers (most notably Internet Explorer 11).
 
-## [0.2.0]
+## [0.2.0] - 2019-04-24
 
 ### Added
 
