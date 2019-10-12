@@ -1,7 +1,7 @@
 {
   "name": "redux-preboiled",
   "description": "Composable, typing-friendly Redux helpers",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "license": "MIT",
   "homepage": "https://redux-preboiled.js.org",
   "repository": {
