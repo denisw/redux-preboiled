@@ -1,15 +1,15 @@
-# npm
+# NPM
 node_modules
 npm-debug.log*
 
 # Build output
-esm
-esnext
-types
-umd
+/esm
+/esnext
+/types
+/umd
 
 # Jest
 coverage/
 
-# misc
+# Misc
 .DS_Store

@@ -12,7 +12,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **TypeScript:** Fix a type error with TypeScript v3.6 when passing actions
   of different types to `reduceActions` and `reduceActionsFrom`.
 
-## [0.3.1]
+### Internal
+
+- Redux Preboiled now has a suite of TypeScript type definition tests powered
+  by [tsd](https://github.com/SamVerschueren/tsd). This should help ensure
+  that the typings don't break on new TypeScript releases.
 
 ### Fixed
 
