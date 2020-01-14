@@ -42,7 +42,7 @@
     "rollup-plugin-node-resolve": "^5.0.0",
     "rollup-plugin-terser": "^5.0.0",
     "tsd": "^0.11.0",
-    "typescript": "^3.4.5"
+    "typescript": "^3.7.0"
   },
   "files": [
     "esm",
