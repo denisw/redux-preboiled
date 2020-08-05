@@ -6,7 +6,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
-    "react-scripts": "3.3.0",
+    "react-scripts": "3.4.1",
     "redux": "^4.0.4",
     "redux-preboiled": "^0.4.0"
   },
@@ -25,7 +25,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {
-    "prettier": "^1.18.2"
-  }
+  "devDependencies": {}
 }
