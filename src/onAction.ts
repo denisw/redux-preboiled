@@ -29,7 +29,9 @@ export default function onAction<
   actionReducer: SubReducer<S, A>
 ): SubReducer<S> {
   const actionType =
-    typeof actionTypeOrCreator === 'string'
+    typeof actionTypeOrCreator === 'string' ||
+    typeof actionTypeOrCreator === 'number' ||
+    typeof actionTypeOrCreator === 'symbol'
       ? actionTypeOrCreator
       : actionTypeOrCreator.type
 
