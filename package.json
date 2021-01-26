@@ -30,8 +30,8 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-typescript": "^7.10.4",
     "@types/jest": "^26.0.8",
-    "@typescript-eslint/eslint-plugin": "^3.8.0",
-    "@typescript-eslint/parser": "^3.8.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
     "babel-jest": "^26.2.2",
     "eslint": "^7.6.0",
     "jest": "^26.2.2",
@@ -41,8 +41,8 @@
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-node-resolve": "^5.0.0",
     "rollup-plugin-terser": "^7.0.0",
-    "tsd": "^0.13.1",
-    "typescript": "^3.9.7"
+    "tsd": "^0.14.0",
+    "typescript": "^4.1.3"
   },
   "files": [
     "esm",
