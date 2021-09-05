@@ -1,35 +1,33 @@
-import babel from 'rollup-plugin-babel'
-import resolve from 'rollup-plugin-node-resolve'
+import { babel } from '@rollup/plugin-babel'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
 import { terser } from 'rollup-plugin-terser'
 
-const extensions = ['.ts', '.js']
+const extensions = ['.ts', '.mjs', '.js']
 
 export default [
   {
     input: 'src/index.ts',
     output: {
       format: 'esm',
-      file: 'esm/index.js'
+      file: 'esm/index.js',
     },
-    plugins: [
-      resolve({ extensions }),
-      babel({ extensions })
-    ]
+    plugins: [nodeResolve({ extensions }), babel({ extensions })],
   },
   {
     input: 'src/index.ts',
     output: {
       format: 'esm',
-      file: 'esnext/index.js'
+      file: 'esnext/index.js',
     },
     plugins: [
-      resolve({ extensions }),
+      nodeResolve({ extensions }),
       babel({
+        babelHelpers: 'bundled',
         extensions,
         configFile: false,
-        presets: ['@babel/preset-typescript']
-      })
-    ]
+        presets: ['@babel/preset-typescript'],
+      }),
+    ],
   },
   {
     input: 'src/index.ts',
@@ -37,12 +35,15 @@ export default [
       format: 'umd',
       file: 'umd/index.js',
       name: 'reduxPreboiled',
-      sourcemap: true
+      sourcemap: true,
     },
     plugins: [
-      resolve({ extensions }),
-      babel({ extensions }),
-      terser()
-    ]
-  }
+      nodeResolve({ extensions }),
+      babel({
+        babelHelpers: 'bundled',
+        extensions,
+      }),
+      terser(),
+    ],
+  },
 ]
