@@ -1,9 +1,10 @@
+import { Action } from 'redux'
 import { BasicActionCreator, PayloadActionCreator } from './types'
 
 /**
- * Returns an action creator that generates actions of the passed type.
+ * Returns an action creator that produces actions of the passed type.
  * It also attaches a `type` property to the action creator that allows
- * retrieving the corresponding action type at runtime.
+ * retrieving the action type at runtime.
  *
  * The returned action creator takes no arguments. To create a version
  * that takes a `payload` and attaches it to the action, call the action
@@ -17,13 +18,23 @@ export default function createAction<T extends string | symbol | number>(
 ): BasicActionCreator<T> {
   const actionCreator = () => ({ type })
 
-  function withPayload<P>(): PayloadActionCreator<P, T> {
-    const result = (payload: P) => ({ type, payload })
-    return Object.assign(result, { type })
-  }
-
   return Object.assign(actionCreator, {
     type,
-    withPayload
+
+    matches(a: Action<T>): a is Action<T> {
+      return this.type === a.type
+    },
+
+    withPayload<P>(): PayloadActionCreator<P, T> {
+      const payloadActionCreator = (payload: P) => ({
+        type,
+        payload,
+      })
+
+      return Object.assign(payloadActionCreator, {
+        type,
+        matches: this.matches as any,
+      })
+    },
   })
 }

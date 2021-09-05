@@ -60,7 +60,7 @@ increment()
 ```
 
 The action type value is made available as a `type` property on the returned
-actions creator (e.g., `increment.type` in the example above). This means
+action creator (e.g., `increment.type` in the example above). This means
 you don't need to define a separate action type constant.
 
 ```js
@@ -68,15 +68,27 @@ increment.type
 // => 'counter/increment'
 ```
 
-The `type` property also enables other helpers to accept a `createAction`
-action creator in place of an action type value. For instance, `onAction`
-(described in the [Reducers guide](./reducers.md)) lets you specify the action
-type by directly passing `increment` instead of `increment.type` or
+The action creator also gets a `matches()` method that compares its `type`
+with that of a given actions, and returns true if they match. In TypeScript,
+this method is defined as a [type predicate][ts-type-predicate], so that the
+compiler can narrow the type of the action in code sections where `matches()`
+is true:
+
+```ts
+if (increment.matches(action)) {
+  // The type of `action` is `Action<'increment'>` here
+}
+```
+
+These additions allow some of Redux Preboiled's other helpers to accept a
+`createAction` action creator in place of an action type value. For instance,
+`onAction` (described in the [Reducers guide](./reducers.md)) lets you specify
+the action type by directly passing `increment` instead of `increment.type` or
 `'counter/increment'`. This is especially beneficial if you use TypeScript,
 where the action creator's static type is [used for automatic type
 inference](../api/onAction.md#typescript-notes).
 
-By default, the action creators returned by `createAction` produce simple
+By default, the action creators returned by `createAction` produce basic
 actions with nothing more than a `type`. But this can be changed, as described
 in the next section.
 
@@ -101,7 +113,7 @@ In TypeScript, you can specify the type of the payload as a type parameter:
 ```ts
 // TypeScript
 
-const multiply = 
+const multiply =
   createAction('counter/multiply').withPayload<number>()
 ```
 

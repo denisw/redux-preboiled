@@ -10,6 +10,14 @@ export interface TypedActionCreator<A extends Action = AnyAction>
    * The action type value used for all of the action creator's actions.
    */
   type: A extends Action<infer T> ? T : never
+
+  /**
+   * Returns true if the passed action has the same `type` as the
+   * actions of this action creator.
+   *
+   * @param action - The action to check.
+   */
+  matches(action: Action): action is A
 }
 
 /**
@@ -17,14 +25,22 @@ export interface TypedActionCreator<A extends Action = AnyAction>
  */
 export interface BasicActionCreator<T = any> {
   /**
+   * Creates an action with the action creator's associated action type.
+   */
+  (): Action<T>
+
+  /**
    * The action type value used for all of the action creator's actions.
    */
   type: T
 
   /**
-   * Creates an action with the action creator's associated action type.
+   * Returns true if the passed action has the same `type` as the
+   * actions of this action creator.
+   *
+   * @param action - The action to check.
    */
-  (): Action<T>
+  matches(action: Action): action is Action<T>
 
   /**
    * Returns a version of the action creator that accepts a payload to
@@ -53,17 +69,25 @@ export interface PayloadAction<P = any, T = any> extends Action<T> {
  */
 export interface PayloadActionCreator<P, T> {
   /**
-   * The action type value used for all of the action creator's actions.
-   */
-  type: T
-
-  /**
    * Creates an action with the action creator's associated action type
    * and the given payload.
    *
    * @param payload - The payload to add to the action.
    */
   (payload: P): PayloadAction<P, T>
+
+  /**
+   * The action type value used for all of the action creator's actions.
+   */
+  type: T
+
+  /**
+   * Returns true if the passed action has the same `type` as the
+   * actions of this action creator.
+   *
+   * @param action - The action to check.
+   */
+  matches(action: Action): action is PayloadAction<P, T>
 }
 
 /**

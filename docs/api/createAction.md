@@ -19,24 +19,45 @@ function createAction<T extends string | symbol | number>(
 ## Details
 
 `createAction` takes an action type value and returns an [action
-creator][redux-action-creators] function which generates actions of that type.
+creator][redux-action-creators] which produces actions of that type.
 
-By default, the returned action creator doesn't take any arguments and
-generates only simple actions with just a `type`. However, it is possible to
-create a *payload action creator* by calling the
-`createAction(…).withPayload()` method. Such an action creator takes a single
-value and adds that to the generated action as `action.payload`.
+For a version of the action creator which accepts a `payload` value and
+attaches the returned action, call the `withPayload()` method (e.g.,
+`createAction("…").withPayload()`.)
 
-The action type passed to `createAction` is directly attached to the action
-creator as a property named `type`. This allows other helpers, such as
-[`onAction`](./onAction.md), to inspect the action creator's corresponding
-action type at runtime.
+In addition to `withPayload()`, action creators returned by `createAction()`
+have the following properties:
+
+- **`type`:** The type value passed to `createAction()`. Removes the need
+  for a separate action type constant, and allows other helpers such as
+  [`onAction`](./onAction.md) to inspect the `type` value of the produced
+  actions at runtime.
+
+- **`matches(action)`:** A method that returns true the the passed action
+  has the same `type` as the ones produced by the action creator.
 
 ### TypeScript Notes
 
-`.withPayload()` is defined with a type parameter that specifies the payload
-type. You can override the default (`any`) by specifying the type parameter
-explicitly, e.g. `createAction(…).withPayload<string>()`.
+- `.withPayload()` is defined with a type parameter that specifies the
+  payload type. You can override the default (`any`) by specifying the
+  type parameter explicitly:
+
+  ```ts
+  const incrementBy = createAction('incrementBy').withPayload<number>();
+  ```
+
+- `.matches()` is defined as a [type predicate][ts-type-predicate]. Using
+  it in a condition allows the TypeScript compiler to narrow the type of
+  passed action to the specific type of action returned by the action
+  creator:
+
+  ```ts
+  if (incrementBy.matches(action)) {
+    const amount = action.payload
+    // Type is inferred to be `number` due to matches()
+  }
+  ```
+
 
 ## Examples
 
@@ -62,10 +83,16 @@ import { createAction } from 'redux-preboiled'
 const multiply = createAction('multiply').withPayload()
 
 multiply(2)
-// => { type: 'increment', payload: 2 }
+// => { type: 'multiply', payload: 2 }
 
 multiply.type
 // => 'multiply'
+
+multiply.matches({ type: 'multiply', payload: 1 })
+// => true
+
+multiply.matches({ type: 'increment' })
+// => false
 ```
 
 Specifying the action payload type (TypeScript):
@@ -89,3 +116,4 @@ multiply('2')
 - [onAction](./onAction.md)
 
 [redux-action-creators]: https://redux.js.org/basics/actions#action-creators
+[ts-type-predicate]: https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates
