@@ -1,8 +1,8 @@
 import { Action, ActionCreator, AnyAction } from 'redux'
 
 /**
- * An action creator with a `type` property which stores the
- * action type value used for all returned actions.
+ * An action creator which allows inspecting the `type` of its generated
+ * actions at runtime.
  */
 export interface TypedActionCreator<A extends Action = AnyAction>
   extends ActionCreator<A> {
@@ -13,10 +13,9 @@ export interface TypedActionCreator<A extends Action = AnyAction>
 }
 
 /**
- * A `TypedActionCreator` that generates simple actions, i.e. actions
- * with nothing else than a `type`.
+ * An action creator that generates actions without payload.
  */
-export interface SimpleActionCreator<T = any> {
+export interface BasicActionCreator<T = any> {
   /**
    * The action type value used for all of the action creator's actions.
    */
@@ -33,6 +32,14 @@ export interface SimpleActionCreator<T = any> {
    */
   withPayload<P = any>(): PayloadActionCreator<P, T>
 }
+
+/**
+ * An alias for BasicActionCreator, for backwards compatibility with
+ * redux-preboild <= 0.4.x.
+ *
+ * @deprecated - Use BasicActionCreator instead.
+ */
+export type SimpleActionCreator = BasicActionCreator
 
 /**
  * An action with an attached payload value.

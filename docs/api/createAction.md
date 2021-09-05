@@ -13,7 +13,7 @@ function createAction(type)
 
 function createAction<T extends string | symbol | number>(
   type: T
-): SimpleActionCreator<T>
+): BasicActionCreator<T>
 ```
 
 ## Details

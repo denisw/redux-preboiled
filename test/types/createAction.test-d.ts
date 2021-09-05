@@ -4,20 +4,20 @@ import {
   createAction,
   TypedActionCreator,
   PayloadAction,
-  SimpleActionCreator,
-  PayloadActionCreator
+  BasicActionCreator,
+  PayloadActionCreator,
 } from '../../src'
 
-type SimpleAction = Action<'simple'>
+type BasicAction = Action<'basic'>
 type NumberAction = PayloadAction<number, 'number'>
 
-const simpleActionCreator = createAction('simple')
+const basicActionCreator = createAction('basic')
 const numberActionCreator = createAction('number').withPayload<number>()
 
-expectType<TypedActionCreator<SimpleAction>>(simpleActionCreator)
-expectType<SimpleActionCreator<'simple'>>(simpleActionCreator)
-expectType<'simple'>(simpleActionCreator.type)
-expectType<SimpleAction>(simpleActionCreator())
+expectType<TypedActionCreator<BasicAction>>(basicActionCreator)
+expectType<BasicActionCreator<'simple'>>(basicActionCreator)
+expectType<'basic'>(basicActionCreator.type)
+expectType<BasicAction>(basicActionCreator())
 
 expectType<TypedActionCreator<NumberAction>>(numberActionCreator)
 expectType<PayloadActionCreator<number, 'number'>>(numberActionCreator)

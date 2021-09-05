@@ -1,8 +1,8 @@
 import { Action, AnyAction } from 'redux'
 import { expectType } from 'tsd'
-import { onAction, SimpleActionCreator, SubReducer } from '../../src'
+import { onAction, BasicActionCreator, SubReducer } from '../../src'
 
-declare const actionCreator: SimpleActionCreator<'action'>
+declare const actionCreator: BasicActionCreator<'action'>
 
 const subReducer1 = onAction('action', (state, action) => {
   expectType<any>(state)
