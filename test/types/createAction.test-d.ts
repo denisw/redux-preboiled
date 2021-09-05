@@ -15,7 +15,7 @@ const basicActionCreator = createAction('basic')
 const numberActionCreator = createAction('number').withPayload<number>()
 
 expectType<TypedActionCreator<BasicAction>>(basicActionCreator)
-expectType<BasicActionCreator<'simple'>>(basicActionCreator)
+expectType<BasicActionCreator<'basic'>>(basicActionCreator)
 expectType<'basic'>(basicActionCreator.type)
 expectType<BasicAction>(basicActionCreator())
 
