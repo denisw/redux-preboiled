@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+(Nothing yet.)
+
+## [0.5.0]
+
+### Added
+
+- `createAction` action creators now have a `matches()` method, which returns
+  true if the passed action's `type` matches that of the creator. In TypeScript,
+  `matches()` is defined as a [type predicate][ts-type-predicate].
+
 ### Changed
 
 - **TypeScript:** The `SimpleActionCreator` type is now called
@@ -78,3 +88,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.3.1]: https://github.com/denisw/redux-preboiled/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/denisw/redux-preboiled/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/denisw/redux-preboiled/compare/v0.1.0...v0.2.0
+
+[ts-type-predicate]: https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates
