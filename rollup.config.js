@@ -11,7 +11,13 @@ export default [
       format: 'esm',
       file: 'esm/index.js',
     },
-    plugins: [nodeResolve({ extensions }), babel({ extensions })],
+    plugins: [
+      nodeResolve({ extensions }),
+      babel({
+        babelHelpers: 'bundled',
+        extensions,
+      }),
+    ],
   },
   {
     input: 'src/index.ts',
