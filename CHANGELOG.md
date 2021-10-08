@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (Nothing yet.)
 
+## [0.5.1]
+
+### Fixed
+
+- Don't throw a `TypeError` if the `matches()` method of an action creator is
+  called independently from the action creator object. Allows idioms such as
+  `filter(actionCreator.matches)` without having to resort to
+  `Function.prototype.bind` (`actionCreator.matches.bind(actionCreator)`).
+
 ## [0.5.0]
 
 ### Added
@@ -83,6 +92,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add a license link to `README.md`.
 
 [Unreleased]: https://github.com/denisw/redux-preboiled/compare/v0.4.1...HEAD
+[0.5.1]: https://github.com/denisw/redux-preboiled/compare/v0.5.0...v0.5.1
+[0.5.0]: https://github.com/denisw/redux-preboiled/compare/v0.4.1...v0.5.0
 [0.4.1]: https://github.com/denisw/redux-preboiled/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/denisw/redux-preboiled/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/denisw/redux-preboiled/compare/v0.3.0...v0.3.1
