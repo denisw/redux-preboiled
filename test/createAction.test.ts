@@ -51,6 +51,12 @@ describe('payload action creator', () => {
     expect(incrementBy.matches(decrementBy(1))).toBe(false)
   })
 
+  test('matches() does not require `this` context', () => {
+    const incrementBy = createAction('incrementBy').withPayload<number>()
+    const matches = incrementBy.matches
+    expect(matches(incrementBy(1))).toBe(true)
+  })
+
   test('[TypeScript] matches() is a type predicate', () => {
     const incrementBy = createAction('incrementBy').withPayload<number>()
     const action: Action<unknown> = incrementBy(1)

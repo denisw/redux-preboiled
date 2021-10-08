@@ -22,7 +22,7 @@ export default function createAction<T extends string | symbol | number>(
     type,
 
     matches(a: Action<T>): a is Action<T> {
-      return this.type === a.type
+      return a.type == type
     },
 
     withPayload<P>(): PayloadActionCreator<P, T> {
