@@ -8,6 +8,13 @@
     "type": "git",
     "url": "git@github.com:denisw/redux-preboiled.git"
   },
+  "exports": {
+    ".": {
+      "import": "esm/index.js",
+      "require": "umd/index.js",
+      "types": "types/index.d.ts"
+    }
+  },
   "main": "umd/index.js",
   "module": "esm/index.js",
   "esnext": "esnext/index.js",
@@ -45,24 +52,11 @@
     "tsd": "^0.14.0",
     "typescript": "^4.1.3"
   },
-  "files": [
-    "esm",
-    "esnext",
-    "src",
-    "types",
-    "umd"
-  ],
+  "files": ["esm", "esnext", "src", "types", "umd"],
   "jest": {
     "testEnvironment": "node",
-    "testMatch": [
-      "<rootDir>/test/**/*.test.ts"
-    ]
+    "testMatch": ["<rootDir>/test/**/*.test.ts"]
   },
-  "browserslist": [
-    "> 0.2%",
-    "not dead",
-    "not ie < 11",
-    "not op_mini all"
-  ],
+  "browserslist": ["> 0.2%", "not dead", "not ie < 11", "not op_mini all"],
   "sideEffects": false
 }
